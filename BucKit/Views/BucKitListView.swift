@@ -1,24 +1,34 @@
 //
-//  ContentView.swift
+//  BucKitListView.swift
 //  BucKit
 //
-//  Created by Ryan Bitner on 8/23/21.
+//  Created by Caleb Greer on 8/26/21.
 //
 
 import SwiftUI
-import MapKit
 
-struct WorldView: View {
+struct BucKitListView: View {
     
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @State var presentNewView: Bool = false
+    var bucKitItems: [BuckitItem]
+    
+    struct FullScreenModalView: View {
+        @Environment(\.presentationMode) var presentationMode
+        
+        var body: some View {
+            Button("Dismiss Modal") {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
+    }
     
     var body: some View {
         TabView {
-            
             NavigationView {
-                Map(coordinateRegion: $region)
-                    .navigationTitle("Map View")
+                List() {
+                
+                }
+                    .navigationTitle("List View")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: Button(action: presentNewItemView, label: {
                         Image(systemName: "plus")
@@ -26,7 +36,6 @@ struct WorldView: View {
                     .fullScreenCover(isPresented: $presentNewView, content: {
                         AddView()
                     })
-                
             }
         }
     }
@@ -35,9 +44,8 @@ struct WorldView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct BucKitListView_Previews: PreviewProvider {
     static var previews: some View {
-        WorldView()
+        BucKitListView()
     }
-    
 }
