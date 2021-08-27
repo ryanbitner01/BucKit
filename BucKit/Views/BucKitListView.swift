@@ -10,7 +10,7 @@ import SwiftUI
 struct BucKitListView: View {
     
     @State var presentNewView: Bool = false
-    var bucKitItems: [BuckitItem]
+    var bucKitItems: [BuckitItem] = []
     
     struct FullScreenModalView: View {
         @Environment(\.presentationMode) var presentationMode
@@ -25,7 +25,7 @@ struct BucKitListView: View {
     var body: some View {
         TabView {
             NavigationView {
-                List() {
+                List {
                 
                 }
                     .navigationTitle("List View")
