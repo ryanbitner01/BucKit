@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MainTabs: View {
+    
+    let testItem = BuckitItem(name: "Paris", location: CLLocation(latitude: 39.320980, longitude: -111.093735), date: Date())
+    
     var body: some View {
         TabView {
             WorldView()
@@ -18,6 +22,10 @@ struct MainTabs: View {
             BucKitView()
                 .tabItem {
                     Image(systemName: "list.bullet")
+                }
+            BucketItemDetailView(item: testItem)
+                .tabItem {
+                    Text("Detail")
                 }
         }
     }

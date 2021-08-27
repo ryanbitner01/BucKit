@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1EA3998C26D92EB5002B52A5 /* BuckitItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3998B26D92EB5002B52A5 /* BuckitItem.swift */; };
+		1EA3998E26D937E7002B52A5 /* BucketItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */; };
 		3C54861226D7ED2700CBF23D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C54861126D7ED2700CBF23D /* Preview Assets.xcassets */; };
 		3C54862A26D7EDE200CBF23D /* BucKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C54862926D7EDE200CBF23D /* BucKitView.swift */; };
 		3C54862C26D7EE1B00CBF23D /* WorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C54862B26D7EE1B00CBF23D /* WorldView.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		1EA3998B26D92EB5002B52A5 /* BuckitItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuckitItem.swift; sourceTree = "<group>"; };
+		1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketItemDetailView.swift; sourceTree = "<group>"; };
 		3C54860726D7ED2400CBF23D /* BucKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C54861126D7ED2700CBF23D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3C54862926D7EDE200CBF23D /* BucKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucKitView.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				3C54862D26D7EE5B00CBF23D /* MainTabs.swift */,
 				3C54862926D7EDE200CBF23D /* BucKitView.swift */,
 				3C54862B26D7EE1B00CBF23D /* WorldView.swift */,
+				1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA3998E26D937E7002B52A5 /* BucketItemDetailView.swift in Sources */,
 				3C54862E26D7EE5B00CBF23D /* MainTabs.swift in Sources */,
 				1EA3998C26D92EB5002B52A5 /* BuckitItem.swift in Sources */,
 				3C54862A26D7EDE200CBF23D /* BucKitView.swift in Sources */,
