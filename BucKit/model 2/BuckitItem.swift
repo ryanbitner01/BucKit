@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-struct BuckitItem {
+struct BuckitItem: Identifiable {
     var name: String
     let id: UUID = UUID()
     let location: MKMapItem?
