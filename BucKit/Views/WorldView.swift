@@ -24,7 +24,7 @@ struct WorldView: View {
                         Image(systemName: "plus")
                     }))
                     .fullScreenCover(isPresented: $presentNewView, content: {
-                        Text("Add new item view")
+                        AddView()
                     })
                 
             }
