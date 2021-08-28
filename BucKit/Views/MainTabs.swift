@@ -23,10 +23,6 @@ struct MainTabs: View {
                 .tabItem {
                     Image(systemName: "list.bullet")
                 }
-            BucketItemDetailView(item: testItem)
-                .tabItem {
-                    Text("Detail")
-                }
         }
     }
 }
