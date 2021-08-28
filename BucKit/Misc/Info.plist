@@ -60,5 +60,7 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app is requesting your location to show your current location</string>
+	<key>NSCameraUsageDescription</key>
+	<string>The application needs to be allowed access to be able to use custom photos</string>
 </dict>
 </plist>

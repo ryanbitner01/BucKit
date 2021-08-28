@@ -23,7 +23,6 @@ struct BucKitListView: View {
     }
     
     var body: some View {
-        TabView {
             NavigationView {
                 List(bucKitItems) {item in
                     NavigationLink(destination: BucketItemDetailView(item: item)) {
@@ -32,7 +31,6 @@ struct BucKitListView: View {
                             Text(item.name)
                             Spacer()
                             Text(item.dateString)
-                        }
                     }
                 }
                     .navigationTitle("BucKit List")

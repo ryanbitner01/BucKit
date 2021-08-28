@@ -14,26 +14,45 @@ struct AddView: View {
     
     @State private var cancelPressed = false
     @State private var addPressed = false
-    
     @State private var name = ""
     @State private var location = ""
     @State private var date = Date()
-    
     @State private var newActivity = ""
     @State private var usedActivity: [String] = [String]()
+    @State private var isShowingPhotoPicker = false
+    @State private var defaultImage  = CircleImage(width: 1000, image: nil).uiImage
+    @State private var onDefault = true
+    @State private var showAlert: Bool = false
+    @State private var sourceType: Int = 0
+    @State private var image: Image?
     
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
-                VStack{
-                    Image(systemName: "mappin")
-                        .resizable()
-                        .frame(width: 100, height: 200)
-                        .padding()
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                        Text("Select an Image")
+                VStack {
+                    if onDefault == true {
+                        Image(uiImage: defaultImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle())
+                    } else {
+                        Image(uiImage: defaultImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle())
+                    }
+                    Button("Change Image", action: {
+                        self.isShowingPhotoPicker.toggle()
                     })
+                    .padding()
+                    .sheet(isPresented: $isShowingPhotoPicker, content: {
+                        ImagePickerView(isPresent: self.$isShowingPhotoPicker, selectedImage: self.$defaultImage)
+                    })
+                    if showAlert {
+
+                    }
                 }
+                
                 HStack {
                     Spacer(minLength: 10)
                     Text("Name:")
@@ -113,13 +132,53 @@ struct AddView: View {
         cancelPressed = true
         presentationMode.wrappedValue.dismiss()
     }
+    
+    func actionSheet() {
+
+    }
 }
 
+struct ImagePickerView: UIViewControllerRepresentable {
+    
+    @Binding var isPresent: Bool
+    @Binding var selectedImage: UIImage
+    
+    func makeUIViewController(context: Context) -> some UIViewController {
+        let controller = UIImagePickerController()
+        controller.delegate = context.coordinator
 
+        return controller
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self)
+    }
+    
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        
+        let parent: ImagePickerView
+        
+            init(parent: ImagePickerView) {
+                self.parent = parent
+            }
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                self.parent.selectedImage = image
+            }
+            self.parent.isPresent = false
+        }
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
+    }
+}
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
         AddView()
     }
 }
+
+
 
