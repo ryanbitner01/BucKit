@@ -18,7 +18,7 @@ class BuckitItem: Identifiable, ObservableObject {
     }
     let date: Date
     let activities: [String]
-    
+    let imageURL: String
     var address: String = ""
     
     var dateString: String {
@@ -28,11 +28,12 @@ class BuckitItem: Identifiable, ObservableObject {
         return dateFormatter.string(from: date)
     }
     
-    init(name: String, location: CLLocation?, date: Date, activities: [String] = []) {
+    init(name: String, location: CLLocation?, date: Date, activities: [String] = [], imageURL: String = "") {
         self.name = name
         self.location = location
         self.date = date
         self.activities = activities
+        self.imageURL = imageURL
         loadPlaceMark()
     }
     
