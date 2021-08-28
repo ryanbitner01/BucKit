@@ -15,7 +15,7 @@ struct MainTabs: View {
                     Image(systemName: "globe")
                 }
             
-            ListView()
+            BucKitListView()
                 .tabItem {
                     Image(systemName: "list.bullet")
                 }
