@@ -9,15 +9,16 @@ import SwiftUI
 import MapKit
 
 struct WorldView: View {
-    
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+        
     @State var presentNewView: Bool = false
     
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.419220, longitude: -111.950684), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+
     var body: some View {
         TabView {
-            
             NavigationView {
-                Map(coordinateRegion: $region)
+                Map(coordinateRegion: $region, showsUserLocation: true)
+                    
                     .navigationTitle("Map View")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: Button(action: presentNewItemView, label: {
@@ -38,6 +39,8 @@ struct WorldView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         WorldView()
+        
     }
     
 }
+
