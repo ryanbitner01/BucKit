@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MainTabs: View {
+    
+    let testItem = BuckitItem(name: "Paris", location: nil, date: Date())
+    
     var body: some View {
         TabView {
             WorldView()
