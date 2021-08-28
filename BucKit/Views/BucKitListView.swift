@@ -25,10 +25,17 @@ struct BucKitListView: View {
     var body: some View {
         TabView {
             NavigationView {
-                List {
-                
+                List(bucKitItems) {item in
+                    NavigationLink(destination: BucketItemDetailView(item: item)) {
+                        HStack {
+                            CircleImage(width: 50, image: item.imageURL)
+                            Text(item.name)
+                            Spacer()
+                            Text(item.dateString)
+                        }
+                    }
                 }
-                    .navigationTitle("List View")
+                    .navigationTitle("BucKit List")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: Button(action: presentNewItemView, label: {
                         Image(systemName: "plus")
