@@ -61,7 +61,9 @@ class BuckitItem: Identifiable, ObservableObject {
                 let address = "\(streetNumber) \(streetName) \(city), \(state), \(zipCode)"
                 self.address = address
             }
-        }
+       } else {
+        self.address = "N/A"
+       }
     }
     
 }

@@ -10,7 +10,7 @@ import MapKit
 
 struct MainTabs: View {
     
-    let testItem = BuckitItem(name: "Paris", location: CLLocation(latitude: 39.320980, longitude: -111.093735), date: Date())
+    let testItem = BuckitItem(name: "Paris", location: nil, date: Date())
     
     var body: some View {
         TabView {
