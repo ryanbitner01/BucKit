@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CircleImage: View {
-    let height: CGFloat
+    let width: CGFloat
     let image: String?
     var imageURL: URL? {
         guard let image = image else {return nil}
@@ -30,7 +30,7 @@ struct CircleImage: View {
     var body: some View {
         Image(uiImage: uiImage)
             .resizable()
-            .frame(minWidth: height * 0.85 ,maxWidth: height, minHeight: height * 0.85 ,maxHeight: height)
+            .frame(width: width > 150 ? 150: width, height: width > 150 ? 150: width)
             .aspectRatio(contentMode: .fit)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.primary, lineWidth: 1).shadow(radius: 50))
@@ -40,8 +40,7 @@ struct CircleImage: View {
 struct CircleImage_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CircleImage(height: 200, image: nil)
-            CircleImage(height: 200, image: nil)
+            CircleImage(width: 200, image: nil)
         }
     }
 }
