@@ -14,7 +14,7 @@ struct BucKitApp: App {
     var body: some Scene {
         WindowGroup {
             WorldView()
-                .environment(\.managedObjectContext, CoreDataStack.shared.container.viewContext)
+                .environment(\.managedObjectContext, CoreDataStack.shared.viewContext)
         }
     }
 }
