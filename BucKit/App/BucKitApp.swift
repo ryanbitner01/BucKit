@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct BucKitApp: App {
-    let persistenceController = PersistenceController.shared
+    let persistenceController = CoreDataStack.shared
 // This is a comment
     var body: some Scene {
         WindowGroup {
-            MainTabs()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            WorldView()
+                .environment(\.managedObjectContext, CoreDataStack.shared.container.viewContext)
         }
     }
 }
