@@ -28,6 +28,7 @@ struct CircleImage: View {
         }
     }
     var body: some View {
+        
         Image(uiImage: uiImage)
             .resizable()
             .frame(width: width > 150 ? 150: width, height: width > 150 ? 150: width)
@@ -44,3 +45,4 @@ struct CircleImage_Previews: PreviewProvider {
         }
     }
 }
+
