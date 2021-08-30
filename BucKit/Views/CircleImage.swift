@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Used to make a circular image
 struct CircleImage: View {
     let width: CGFloat
     let image: String?
