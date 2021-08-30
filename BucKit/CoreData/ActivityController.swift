@@ -53,7 +53,7 @@ class ActivityController: NSManagedObject {
     func loadEntries() {
         let request = NSFetchRequest<Activity>(entityName: "Activity")
         do {
-            self.activities = try CoreDataStack.shared.container.viewContext.fetch(request)
+            self.activities = try CoreDataStack.shared.viewContext.fetch(request)
         } catch ( let error ){
             print(error.localizedDescription)
             self.activities = []
