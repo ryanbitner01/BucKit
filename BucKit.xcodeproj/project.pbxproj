@@ -19,11 +19,11 @@
 		3C887A8826DB3FFA00D68906 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C887A8626DB3FFA00D68906 /* Activity+CoreDataClass.swift */; };
 		3C887A8926DB3FFA00D68906 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C887A8726DB3FFA00D68906 /* Activity+CoreDataProperties.swift */; };
 		3C887A8B26DB433500D68906 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C887A8A26DB433500D68906 /* ActivityController.swift */; };
-		3C887A8E26DB729500D68906 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C887A8C26DB707B00D68906 /* Persistence.swift */; };
 		3C9B869326DBFB19009FA683 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B869226DBFB19009FA683 /* MapView.swift */; };
 		3C9B869526DBFC99009FA683 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B869426DBFC99009FA683 /* MapViewModel.swift */; };
 		3C9B869726DC1B81009FA683 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B869626DC1B81009FA683 /* Place.swift */; };
 		3CBADF9A26DC848000F92E23 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBADF9926DC848000F92E23 /* ListView.swift */; };
+		3CBADFBC26DD33FC00F92E23 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBADFBB26DD33FC00F92E23 /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,11 +41,11 @@
 		3C887A8626DB3FFA00D68906 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3C887A8726DB3FFA00D68906 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3C887A8A26DB433500D68906 /* ActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityController.swift; sourceTree = "<group>"; };
-		3C887A8C26DB707B00D68906 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Persistence.swift; path = "../../../../.Trash/Core-Data-in-SwiftUI---Pizza-Restaurant-App-master/PizzaRestaurant/PizzaRestaurant/Persistence.swift"; sourceTree = "<group>"; };
 		3C9B869226DBFB19009FA683 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		3C9B869426DBFC99009FA683 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		3C9B869626DC1B81009FA683 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		3CBADF9926DC848000F92E23 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		3CBADFBB26DD33FC00F92E23 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,9 +132,9 @@
 		3C54865426D7F26D00CBF23D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3C887A8C26DB707B00D68906 /* Persistence.swift */,
 				3C54865626D7F26D00CBF23D /* BucKit.xcdatamodeld */,
 				3C887A8A26DB433500D68906 /* ActivityController.swift */,
+				3CBADFBB26DD33FC00F92E23 /* Persistence.swift */,
 			);
 			name = CoreData;
 			path = BucKit/CoreData;
@@ -219,7 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C887A8E26DB729500D68906 /* Persistence.swift in Sources */,
+				3CBADFBC26DD33FC00F92E23 /* Persistence.swift in Sources */,
 				3C9B869326DBFB19009FA683 /* MapView.swift in Sources */,
 				3CBADF9A26DC848000F92E23 /* ListView.swift in Sources */,
 				1EA3998E26D937E7002B52A5 /* BucketItemDetailView.swift in Sources */,
