@@ -10,14 +10,19 @@ import MapKit
 
 struct BucketItemDetailView: View {
     @ObservedObject var item: BuckitItem
+        
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center ,spacing: 25) {
                 CircleImage(width: geometry.size.width * 0.45, image: nil)
                     .padding()
-                Text("Name: \(item.name)")
+                VStack {
+                    Text("Name: \(item.name)")
+                    .padding()
                 Text("Date: \(item.dateString)")
+                    .padding()
                 Text("Location: \(item.address)")
+                }
                 Section {
                     VStack(alignment: .leading) {
                         Text("Activities")

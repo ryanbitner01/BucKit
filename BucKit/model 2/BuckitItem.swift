@@ -66,5 +66,4 @@ class BuckitItem: Identifiable, ObservableObject {
         self.address = "N/A"
        }
     }
-    
 }

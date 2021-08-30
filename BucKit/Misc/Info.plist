@@ -58,9 +58,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app is requesting your location to show your current location</string>
 	<key>NSCameraUsageDescription</key>
-	<string>The application needs to be allowed access to be able to use custom photos</string>
+	<string></string>
+	<key>UIUserInterfaceStyle</key>
+	<string>light</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
 </dict>
 </plist>

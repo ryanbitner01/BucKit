@@ -13,8 +13,8 @@ struct BucKitApp: App {
 // This is a comment
     var body: some Scene {
         WindowGroup {
-            MainTabs()
-                .environment(\.managedObjectContext, CoreDataStack.shared.viewContext)
+            WorldView()
+                .environment(\.managedObjectContext, CoreDataStack.shared.container.viewContext)
         }
     }
 }
