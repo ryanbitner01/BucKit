@@ -11,9 +11,8 @@ import CoreData
 struct ListView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    
-    @FetchRequest(entity: Activity.entity(),sortDescriptors:[NSSortDescriptor(keyPath: \Activity.name, ascending: true)])
-    var fetchResults: FetchedResults<Activity>
+    @FetchRequest(entity: BucKitItem.entity(),sortDescriptors:[NSSortDescriptor(keyPath: \BucKitItem.name, ascending: true)])
+    var fetchResults: FetchedResults<BucKitItem>
     
     var body: some View {
             if fetchResults.isEmpty {
@@ -33,10 +32,10 @@ struct ListView: View {
                         Image(systemName: "circle")
                             .padding(10)
                         VStack {
-                            Text("\(results.name ?? "Error")")
+                            Text("\(results.name)")
                                 .font(.system(size: 14))
                             Spacer(minLength: 10)
-                            Text("\(results.location ?? "Error")")
+                            Text("\(results.address)")
                                 .font(.system(size: 14))
                         }
                         Spacer()

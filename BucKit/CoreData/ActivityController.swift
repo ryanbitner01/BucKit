@@ -9,36 +9,29 @@ import SwiftUI
 import CoreData
 
 
-class ActivityController: NSManagedObject {
+class ActivityController: ObservableObject {
     
     static let shared = ActivityController()
         
-    var activities = [Activity]()
+    @Published var activities: [BucKitItem] = []
+    var newActivity: BucKitItem?
     
-    var newActivity: Activity?
-    let activity: Activity = Activity()
-    
-    func createActivity(name: String, location: String, date: Date, image: UIImage, id: UUID) {
+    func createActivity(name: String, latitude: NSDecimalNumber, longitude: NSDecimalNumber, date: Date, image: Data?, id: UUID) {
         
-        updateActivity(name: name, location: location, date: date, image: image, id: id)
+        updateActivity(name: name, latitude: latitude, longitude: longitude, date: date, image: image, id: id)
         saveAndReload()
     }
     
-    func updateActivity(name: String, location: String, date: Date, image: UIImage, id: UUID) {
+    func updateActivity(name: String, latitude: NSDecimalNumber, longitude: NSDecimalNumber, date: Date, image: Data?, id: UUID) {
         
-        activity.date = date
-        activity.id = id
-        activity.image = image.jpegData(compressionQuality: 0.5)
-        activity.location = location
-        activity.name = name
-
+       
 
         
         saveAndReload()
         
     }
 
-    func deleteActivity(activity: Activity) {
+    func deleteActivity(activity: BucKitItem) {
         activity.managedObjectContext?.delete(activity)
         saveAndReload()
         
@@ -51,20 +44,12 @@ class ActivityController: NSManagedObject {
     
     private
     func loadEntries() {
-        let request = NSFetchRequest<Activity>(entityName: "Activity")
+        let request = NSFetchRequest<BucKitItem>(entityName: "BucKitItem")
         do {
             self.activities = try CoreDataStack.shared.viewContext.fetch(request)
         } catch ( let error ){
             print(error.localizedDescription)
             self.activities = []
         }
-    }
-}
-
-extension ActivityController {
-    static
-    func getData() -> NSFetchRequest<ActivityController> {
-        let request = ActivityController.fetchRequest() as! NSFetchRequest <ActivityController>
-        return request
     }
 }

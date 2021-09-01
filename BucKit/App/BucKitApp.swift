@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct BucKitApp: App {
     let persistenceController = CoreDataStack.shared
+    
 // This is a comment
     var body: some Scene {
         WindowGroup {

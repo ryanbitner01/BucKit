@@ -10,7 +10,7 @@ import MapKit
 
 struct BucketItemDetailView: View {
     
-    @ObservedObject var item: BuckitItem
+    @ObservedObject var item: BucKitItem
         
     var body: some View {
         GeometryReader { geometry in
@@ -20,7 +20,7 @@ struct BucketItemDetailView: View {
                 VStack {
                     Text("Name: \(item.name)")
                     .padding()
-                    Text("Date: \(item.dateString)")
+                    Text("Date: \(item.stringDate())")
                     .padding()
                 Text("Location: \(item.address)")
                 }
@@ -30,7 +30,7 @@ struct BucketItemDetailView: View {
                             .font(.title2)
                             .padding()
 
-                        List(item.activities , id: \.self) {activity in
+                        List(item.activities ?? [] , id: \.self) {activity in
                             HStack {
                                 Image(systemName: "circle.fill")
                                 Text(activity)
@@ -39,14 +39,19 @@ struct BucketItemDetailView: View {
                     }
                 }
             }
-        }
+        } .onAppear {item.loadPlaceMark()}
     }
 }
 
 struct BucketItemDetailView_Previews: PreviewProvider {
     
-    
     static var previews: some View {
-        BucketItemDetailView(item: BuckitItem(name: "Test Name", location: CLLocation(latitude: 48.856613, longitude: 2.352222), date: Date(), activities: ["Test 1", "Test 2"]))
+        let context = CoreDataStack.shared.persistentContainer.viewContext
+        let item = BucKitItem(context: context)
+        item.name = "Paris"
+        item.date = Date()
+        item.latitude = 48.856613
+        item.longitude = 2.352222
+        return BucketItemDetailView(item: item)
     }
 }

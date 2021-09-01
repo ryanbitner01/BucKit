@@ -151,11 +151,10 @@ struct AddView: View {
                     Text("Cancel")
                     
                 }), trailing: Button(action: {
-                    let newActivity = Activity(context: viewContext)
-                    newActivity.id = UUID()
+                    let newActivity = BucKitItem(context: viewContext)
+                    newActivity.id = UUID().uuidString
                     newActivity.name = self.name
-                    newActivity.location = self.location
-                    newActivity.date = self.date
+// Add latitude and longitude                    newActivity.date = self.date
                     newActivity.image = self.defaultImage.jpegData(compressionQuality: 0.5)
                     
                     do {
