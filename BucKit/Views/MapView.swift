@@ -36,7 +36,6 @@ struct MapView:  UIViewRepresentable {
     
     class Coordinator: NSObject, MKMapViewDelegate {
         
-        
     }
     
 }

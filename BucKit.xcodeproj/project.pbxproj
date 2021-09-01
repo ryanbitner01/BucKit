@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E22948D26DFE09E0036DF4C /* NewWorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22948C26DFE09E0036DF4C /* NewWorldView.swift */; };
 		1EA3998E26D937E7002B52A5 /* BucketItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */; };
 		1EA3999026D9D205002B52A5 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3998F26D9D205002B52A5 /* CircleImage.swift */; };
 		1EEA298826DFC7B400E3794A /* BucKitItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA298626DFC7B400E3794A /* BucKitItem+CoreDataClass.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E22948C26DFE09E0036DF4C /* NewWorldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorldView.swift; sourceTree = "<group>"; };
 		1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketItemDetailView.swift; sourceTree = "<group>"; };
 		1EA3998F26D9D205002B52A5 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		1EEA298626DFC7B400E3794A /* BucKitItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BucKitItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				3C9B869226DBFB19009FA683 /* MapView.swift */,
 				3CBADF9926DC848000F92E23 /* ListView.swift */,
 				1EA3998F26D9D205002B52A5 /* CircleImage.swift */,
+				1E22948C26DFE09E0036DF4C /* NewWorldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E22948D26DFE09E0036DF4C /* NewWorldView.swift in Sources */,
 				3CBADFBC26DD33FC00F92E23 /* Persistence.swift in Sources */,
 				3C9B869326DBFB19009FA683 /* MapView.swift in Sources */,
 				1EEA298926DFC7B400E3794A /* BucKitItem+CoreDataProperties.swift in Sources */,
