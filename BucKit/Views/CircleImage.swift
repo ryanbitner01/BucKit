@@ -32,7 +32,7 @@ struct CircleImage: View {
         
         Image(uiImage: uiImage)
             .resizable()
-            .frame(width: width > 150 ? 150: width, height: width > 150 ? 150: width)
+            .frame(minWidth: 50, idealWidth: width, maxWidth: 150, minHeight: 50, idealHeight: width, maxHeight: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             .aspectRatio(contentMode: .fit)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.primary, lineWidth: 1).shadow(radius: 50))
