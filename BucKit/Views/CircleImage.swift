@@ -47,3 +47,20 @@ struct CircleImage_Previews: PreviewProvider {
     }
 }
 
+extension UIImage {
+    
+    func resizedRoundedImage() -> UIImage {
+        let size: CGFloat = 44
+        let imageView: UIImageView = UIImageView(image: self)
+        imageView.frame = CGRect(origin: .zero, size: CGSize(width: size, height: size))
+        let layer = imageView.layer
+        layer.masksToBounds = true
+        layer.cornerRadius = size / 2
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return roundedImage!
+    }
+
+}

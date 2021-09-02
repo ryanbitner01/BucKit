@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E22948D26DFE09E0036DF4C /* NewWorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22948C26DFE09E0036DF4C /* NewWorldView.swift */; };
+		1E22949526E128F60036DF4C /* BucKitItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22949426E128F60036DF4C /* BucKitItemService.swift */; };
 		1EA3998E26D937E7002B52A5 /* BucketItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */; };
 		1EA3999026D9D205002B52A5 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3998F26D9D205002B52A5 /* CircleImage.swift */; };
 		1EEA298826DFC7B400E3794A /* BucKitItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA298626DFC7B400E3794A /* BucKitItem+CoreDataClass.swift */; };
@@ -27,7 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1E22948C26DFE09E0036DF4C /* NewWorldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorldView.swift; sourceTree = "<group>"; };
+		1E22949426E128F60036DF4C /* BucKitItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucKitItemService.swift; sourceTree = "<group>"; };
 		1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketItemDetailView.swift; sourceTree = "<group>"; };
 		1EA3998F26D9D205002B52A5 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		1EEA298626DFC7B400E3794A /* BucKitItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BucKitItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -59,20 +59,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1EA3998A26D92E91002B52A5 /* model 2 */ = {
+		1EA3998A26D92E91002B52A5 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				1EEA298626DFC7B400E3794A /* BucKitItem+CoreDataClass.swift */,
+				1EEA298726DFC7B400E3794A /* BucKitItem+CoreDataProperties.swift */,
+				1E22949426E128F60036DF4C /* BucKitItemService.swift */,
 				3C9B869426DBFC99009FA683 /* MapViewModel.swift */,
 				3C9B869626DC1B81009FA683 /* Place.swift */,
 			);
-			path = "model 2";
+			path = model;
 			sourceTree = "<group>";
 		};
 		3C5485FE26D7ED2400CBF23D = {
 			isa = PBXGroup;
 			children = (
-				1EEA298626DFC7B400E3794A /* BucKitItem+CoreDataClass.swift */,
-				1EEA298726DFC7B400E3794A /* BucKitItem+CoreDataProperties.swift */,
 				3C54860926D7ED2400CBF23D /* BucKit */,
 				3C54860826D7ED2400CBF23D /* Products */,
 			);
@@ -90,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				3C54866326D7F5F400CBF23D /* Info.plist */,
-				1EA3998A26D92E91002B52A5 /* model 2 */,
+				1EA3998A26D92E91002B52A5 /* model */,
 				3C54865226D7F09900CBF23D /* App */,
 				3C54865426D7F26D00CBF23D /* CoreData */,
 				3C54865826D7F26D00CBF23D /* Misc */,
@@ -117,7 +118,6 @@
 				3C9B869226DBFB19009FA683 /* MapView.swift */,
 				3CBADF9926DC848000F92E23 /* ListView.swift */,
 				1EA3998F26D9D205002B52A5 /* CircleImage.swift */,
-				1E22948C26DFE09E0036DF4C /* NewWorldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,11 +219,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E22948D26DFE09E0036DF4C /* NewWorldView.swift in Sources */,
 				3CBADFBC26DD33FC00F92E23 /* Persistence.swift in Sources */,
 				3C9B869326DBFB19009FA683 /* MapView.swift in Sources */,
 				1EEA298926DFC7B400E3794A /* BucKitItem+CoreDataProperties.swift in Sources */,
 				3CBADF9A26DC848000F92E23 /* ListView.swift in Sources */,
+				1E22949526E128F60036DF4C /* BucKitItemService.swift in Sources */,
 				1EA3998E26D937E7002B52A5 /* BucketItemDetailView.swift in Sources */,
 				3C9B869526DBFC99009FA683 /* MapViewModel.swift in Sources */,
 				1EEA298826DFC7B400E3794A /* BucKitItem+CoreDataClass.swift in Sources */,

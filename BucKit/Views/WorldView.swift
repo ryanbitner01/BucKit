@@ -12,9 +12,10 @@ import CoreLocation
 
 struct WorldView: View {
     
+    @EnvironmentObject var bucKitItemService: BucKitItemService
+    
     @State var presentNewView: Bool = false
     @State var searchBar: String = ""
-    
     @StateObject var mapData = MapViewModel()
     @State var locationManager = CLLocationManager()
     @State private var currentLocation = CLLocationCoordinate2D()
@@ -23,7 +24,7 @@ struct WorldView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                MapView()
+                MapView(bucKitItemService: bucKitItemService)
                     .environmentObject(mapData)
                     .ignoresSafeArea(.all, edges: .all)
                 
@@ -150,6 +151,7 @@ struct WorldView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         WorldView()
+            .environmentObject(BucKitItemService())
         
     }
 }
