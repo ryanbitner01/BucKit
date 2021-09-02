@@ -10,12 +10,16 @@ import SwiftUI
 @main
 struct BucKitApp: App {
     let persistenceController = CoreDataStack.shared
+    var bucKitItemService: BucKitItemService
+    
+    init() {
+        self.bucKitItemService = BucKitItemService()
+    }
     
 // This is a comment
     var body: some Scene {
         WindowGroup {
-            WorldView()
-                .environment(\.managedObjectContext, CoreDataStack.shared.viewContext)
+            WorldView().environmentObject(bucKitItemService)
         }
     }
 }
