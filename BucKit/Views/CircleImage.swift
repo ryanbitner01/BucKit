@@ -50,7 +50,7 @@ struct CircleImage_Previews: PreviewProvider {
 extension UIImage {
     
     func resizedRoundedImage() -> UIImage {
-        let size: CGFloat = 44
+        let size: CGFloat = 50
         let imageView: UIImageView = UIImageView(image: self)
         imageView.frame = CGRect(origin: .zero, size: CGSize(width: size, height: size))
         let layer = imageView.layer

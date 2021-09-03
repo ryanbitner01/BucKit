@@ -11,7 +11,7 @@ import MapKit
 struct MapView:  UIViewRepresentable {
     
     @EnvironmentObject var mapData: MapViewModel
-    var bucKitItemService: BucKitItemService
+    @ObservedObject var bucKitItemService: BucKitItemService
     
     let map = MKMapView()
     
@@ -26,17 +26,16 @@ struct MapView:  UIViewRepresentable {
         
         view.showsUserLocation = true
         view.delegate = context.coordinator
-        view.addAnnotations(getAnnotations())
-        
+        getAnnotations()
         return view
         
     }
     
-    func getAnnotations() -> [MKAnnotation] {
+    func getAnnotations() {
         let bucKitItems = bucKitItemService.items
         var annotations: [MKAnnotation] = []
         for item in bucKitItems {
-            guard let latitude = item.latitude, let longitude = item.longitude else {return []}
+            guard let latitude = item.latitude, let longitude = item.longitude else {continue}
             let name = item.name
             let subName = item.stringDate()
             let annotation = MKPointAnnotation()
@@ -46,11 +45,13 @@ struct MapView:  UIViewRepresentable {
             
             annotations.append(annotation)
         }
-        return annotations
+        mapData.mapView.removeAnnotations(mapData.mapView.annotations)
+        mapData.mapView.addAnnotations(annotations)
+        print(mapData.mapView.annotations)
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+        print("Update")
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
@@ -79,6 +80,10 @@ struct MapView:  UIViewRepresentable {
                 annotationView?.annotation = annotation
             }
             return annotationView
+        }
+        
+        func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+
         }
     }
     
