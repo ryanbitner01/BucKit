@@ -19,7 +19,9 @@ struct BucKitApp: App {
 // This is a comment
     var body: some Scene {
         WindowGroup {
-            WorldView().environmentObject(bucKitItemService)
+            WorldView()
+                .environmentObject(bucKitItemService)
+            
         }
     }
 }
