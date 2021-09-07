@@ -31,20 +31,13 @@ struct BucketItemDetailView: View {
                         Text("Activities")
                             .font(.title2)
                             .padding()
-                        List(activities, id: \.id) {
+                        List(Array(item.activities), id: \.id) {
                             Text("\($0.name)")
                         }
                     }
                 }
             }
-        } .onAppear {item.loadPlaceMark()
-            getActivities()
-        }
-    }
-    
-    func getActivities() {
-        let array = Array(arrayLiteral: item.activities) as? [Activity]
-        self.activities = array ?? []
+        } .onAppear {item.loadPlaceMark() }
     }
 }
 

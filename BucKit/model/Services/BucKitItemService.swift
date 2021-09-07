@@ -16,12 +16,12 @@ class BucKitItemService: ObservableObject {
         fetchItems()
         
         //Testing
-        let activity = Activity(context: context)
-        activity.name = "Test"
-        
-        try! context.save()
-        
-        addItem(name: "TestName", latitude: 25, longitude: -76, date: Date(), image: nil, id: UUID(), activities: [activity])
+//        let activity = Activity(context: context)
+//        activity.name = "Test"
+//
+//        try! context.save()
+//
+//        addItem(name: "Paris", latitude: 48.856613, longitude: 2.352222, date: Date(), image: nil, id: UUID(), activities: [activity])
     }
     
     func removeItem(bucKitItem: BucKitItem) {

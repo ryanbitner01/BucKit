@@ -22,7 +22,6 @@ struct WorldView: View {
     @State private var list: Bool = false
     
     var body: some View {
-        Text("Hello World")
         NavigationView {
             ZStack {
                 MapView(bucKitItemService: bucKitItemService)
@@ -133,7 +132,7 @@ struct WorldView: View {
                 Image(systemName: "list.bullet")
             })
             .fullScreenCover(isPresented: $list, content: {
-                ListView()
+                ListView(bucketItemService: bucKitItemService)
             }), trailing: Button(action: presentNewViewPressed, label: {
                 Image(systemName: "plus")
             }))
