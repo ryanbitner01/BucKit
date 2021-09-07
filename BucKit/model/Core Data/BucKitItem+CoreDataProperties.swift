@@ -23,7 +23,7 @@ extension BucKitItem {
     @NSManaged public var latitude: NSDecimalNumber?
     @NSManaged public var longitude: NSDecimalNumber?
     @NSManaged public var name: String
-    @NSManaged public var activities: NSSet
+    @NSManaged public var activities: Set<Activity>
 
 }
 
