@@ -2,7 +2,7 @@
 //  BucKitItem+CoreDataClass.swift
 //  BucKit
 //
-//  Created by Ryan Bitner on 9/1/21.
+//  Created by Ryan Bitner on 9/7/21.
 //
 //
 

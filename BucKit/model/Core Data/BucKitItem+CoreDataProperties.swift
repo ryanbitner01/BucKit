@@ -2,7 +2,7 @@
 //  BucKitItem+CoreDataProperties.swift
 //  BucKit
 //
-//  Created by Ryan Bitner on 9/1/21.
+//  Created by Ryan Bitner on 9/7/21.
 //
 //
 
@@ -23,7 +23,24 @@ extension BucKitItem {
     @NSManaged public var latitude: NSDecimalNumber?
     @NSManaged public var longitude: NSDecimalNumber?
     @NSManaged public var name: String
-    @NSManaged public var activities: [String]?
+    @NSManaged public var activities: NSSet
+
+}
+
+// MARK: Generated accessors for activities
+extension BucKitItem {
+
+    @objc(addActivitiesObject:)
+    @NSManaged public func addToActivities(_ value: Activity)
+
+    @objc(removeActivitiesObject:)
+    @NSManaged public func removeFromActivities(_ value: Activity)
+
+    @objc(addActivities:)
+    @NSManaged public func addToActivities(_ values: NSSet)
+
+    @objc(removeActivities:)
+    @NSManaged public func removeFromActivities(_ values: NSSet)
 
 }
 

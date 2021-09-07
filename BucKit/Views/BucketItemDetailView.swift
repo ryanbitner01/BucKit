@@ -11,6 +11,7 @@ import MapKit
 struct BucketItemDetailView: View {
     
     @ObservedObject var item: BucKitItem
+    @State var activities: [Activity] = []
         
     var body: some View {
         GeometryReader { geometry in
@@ -22,6 +23,7 @@ struct BucketItemDetailView: View {
                     .padding()
                     Text("Date: \(item.stringDate())")
                     .padding()
+                    
                 Text("Location: \(item.address)")
                 }
                 Section {
@@ -29,17 +31,20 @@ struct BucketItemDetailView: View {
                         Text("Activities")
                             .font(.title2)
                             .padding()
-
-                        List(item.activities ?? [] , id: \.self) {activity in
-                            HStack {
-                                Image(systemName: "circle.fill")
-                                Text(activity)
-                            }
+                        List(activities, id: \.id) {
+                            Text("\($0.name)")
                         }
                     }
                 }
             }
-        } .onAppear {item.loadPlaceMark()}
+        } .onAppear {item.loadPlaceMark()
+            getActivities()
+        }
+    }
+    
+    func getActivities() {
+        let array = Array(arrayLiteral: item.activities) as? [Activity]
+        self.activities = array ?? []
     }
 }
 

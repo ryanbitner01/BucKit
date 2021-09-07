@@ -11,9 +11,11 @@ import SwiftUI
 struct BucKitApp: App {
     let persistenceController = CoreDataStack.shared
     var bucKitItemService: BucKitItemService
+    var activityService: ActivityService
     
     init() {
         self.bucKitItemService = BucKitItemService()
+        self.activityService = ActivityService()
     }
     
 // This is a comment
