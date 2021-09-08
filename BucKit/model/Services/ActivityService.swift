@@ -8,7 +8,7 @@
 import Foundation
 
 class ActivityService: ObservableObject {
-    
+        
     @Published var activities: [Activity] = []
     
     let context = CoreDataStack.shared.persistentContainer.viewContext
@@ -21,6 +21,8 @@ class ActivityService: ObservableObject {
         let newActivity = Activity(context: context)
         newActivity.name = name
         newActivity.id = UUID().uuidString
+        
+        saveContext()
     }
     
    func saveContext() {

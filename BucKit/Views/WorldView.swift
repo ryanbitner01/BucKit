@@ -132,7 +132,7 @@ struct WorldView: View {
                 Image(systemName: "list.bullet")
             })
             .fullScreenCover(isPresented: $list, content: {
-                ListView(bucketItemService: bucKitItemService)
+                ListView()
             }), trailing: Button(action: presentNewViewPressed, label: {
                 Image(systemName: "plus")
             }))

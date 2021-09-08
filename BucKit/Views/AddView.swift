@@ -19,15 +19,14 @@ struct AddView: View {
     @State var name = ""
     @State var location = ""
     @State var date = Date()
-    @State var usedActivity: [String] = [String]()
-    @State private var newActivity = ""
+    @State private var savedActivities: [Activity] = [Activity]()
+    @State private var newActivityName = ""
     @State private var isShowingPhotoPicker = false
     @State private var defaultImage  = CircleImage(width: 1000, image: nil).uiImage
     @State private var onDefault = true
     @State private var showAlert: Bool = false
     @State private var sourceType: Int = 0
-    @State private var image: Image?
-    @State private var showtextFieldToolbar = false
+    @State private var image = Data()
     
     var body: some View {
         NavigationView {
@@ -50,7 +49,7 @@ struct AddView: View {
                     })
                     .padding()
                     .sheet(isPresented: $isShowingPhotoPicker, content: {
-                        ImagePickerView(isPresent: self.$isShowingPhotoPicker, selectedImage: self.$defaultImage)
+                        ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
                     })
                     if showAlert {
                         
@@ -62,14 +61,7 @@ struct AddView: View {
                     Text("Name:")
                         .font(.system(size: 19))
                     Spacer(minLength: 45)
-                    TextField("Enter goal name", text: $name) {
-                        isChanged in
-                        if isChanged {
-                            showtextFieldToolbar = true
-                        }
-                    } onCommit: {
-                        showtextFieldToolbar = false
-                    }
+                    TextField("Enter goal name", text: $name)
                     .contentShape(Rectangle())
                     .multilineTextAlignment(.center)
                     .frame(height: 10)
@@ -77,7 +69,7 @@ struct AddView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 14)
                             .stroke(Color.blue, lineWidth: 2))
-                
+                    
                     .padding()
                 }
                 HStack {
@@ -85,14 +77,7 @@ struct AddView: View {
                     Text("Location:")
                         .font(.system(size: 20))
                     Spacer(minLength: 25)
-                    TextField("Enter location name", text: $location) {
-                        isChanged in
-                        if isChanged {
-                            showtextFieldToolbar = true
-                        }
-                    } onCommit: {
-                        showtextFieldToolbar = false
-                    }
+                    TextField("Enter location name", text: $location)
                     .contentShape(Rectangle())
                     .frame(height: 10)
                     .multilineTextAlignment(.center)
@@ -115,32 +100,27 @@ struct AddView: View {
                 Form {
                     HStack {
                         Text("Activity:")
-                        TextField("Type Activity Here", text: $newActivity) {
-                            isChanged in
-                            if isChanged {
-                                showtextFieldToolbar = true
-                            }
-                        } onCommit: {
-                            showtextFieldToolbar = false
-                            addActivity()
-                        }
+                        TextField("Type Activity Here", text: $newActivityName)
                         Image(systemName: "plus")
                             .onTapGesture {
                                 addActivity()
                             }
                             .foregroundColor(.blue)
                     }
-                    List(usedActivity, id: \.self) {
-                        
-                        Image(systemName: "circle.fill")
-                            .foregroundColor(.black)
-                        Text($0)
-                        Spacer()
-                        Button(action: {
-                            deleteActivity()
-                        }, label: {
-                            Image(systemName: "trash")
-                        })
+                    List {
+                        ForEach(savedActivities) { activity in
+                            HStack {
+                            Image(systemName: "circle.fill")
+                                .foregroundColor(.black)
+                            Text(activity.name)
+                            Spacer()
+                            Button(action: {
+                                deleteActivity(activity: activity)
+                            }, label: {
+                                Image(systemName: "trash")
+                                })
+                            }
+                        }
                     }
                 }
                 
@@ -151,103 +131,35 @@ struct AddView: View {
                     Text("Cancel")
                     
                 }), trailing: Button(action: {
-                    let newActivity = BucKitItem(context: viewContext)
-                    newActivity.id = UUID().uuidString
-                    newActivity.name = self.name
-// Add latitude and longitude                    newActivity.date = self.date
-                    newActivity.image = self.defaultImage.jpegData(compressionQuality: 0.5)
+                    BucKitItemService.shared.addItem(name: name, latitude: 0, longitude: 0, date: date, image: image, id: UUID(), activities: savedActivities)
                     
-                    do {
-                        try viewContext.save()
-                        print("Saved")
-                        presentationMode.wrappedValue.dismiss()
-                    } catch {
-                        print(error.localizedDescription)
-                    }
+                    presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Save")
                 })
-                VStack {
-                    Spacer()
-                    if showtextFieldToolbar {
-                        HStack {
-                            Spacer()
-                            Button("Close") {
-                                showtextFieldToolbar = false
-                                UIApplication.shared
-                                    .sendAction(#selector(UIResponder.resignFirstResponder),
-                                                to: nil, from: nil, for: nil)
-                            }
-                            .foregroundColor(Color.black)
-                            .padding(.trailing, 12)
-                        }
-                        .frame(idealWidth: .infinity, maxWidth: .infinity,
-                               idealHeight: 44, maxHeight: 44,
-                               alignment: .center)
-                        .background(Color.secondary)
-                    }
-                }
             }
         }
     }
-    func addActivity() {
-        let answer = newActivity.lowercased()
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        usedActivity.insert(answer, at: 0)
-        newActivity = ""
-        addPressed = true
-        
-    }
+func addActivity() {
+    let newActivity = Activity(context: viewContext)
+    newActivity.name = newActivityName
+    newActivity.id = UUID().uuidString
     
-    func deleteActivity() {
-        for id in usedActivity {
-            if let index = usedActivity.lastIndex(where: { $0 == id })  {
-                usedActivity.remove(at: index)
-            }
-        }
-        usedActivity = [String]()
-    }
-    func cancel() {
-        cancelPressed = true
-        presentationMode.wrappedValue.dismiss()
-    }
+    savedActivities.append(newActivity)
+    
+    
 }
 
-struct ImagePickerView: UIViewControllerRepresentable {
-    
-    @Binding var isPresent: Bool
-    @Binding var selectedImage: UIImage
-    
-    func makeUIViewController(context: Context) -> some UIViewController {
-        let controller = UIImagePickerController()
-        controller.delegate = context.coordinator
-        
-        return controller
+    func deleteActivity(activity: Activity) {
+        if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
+            savedActivities.remove(at: index)
     }
     
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self)
-    }
-    
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        
-        let parent: ImagePickerView
-        
-        init(parent: ImagePickerView) {
-            self.parent = parent
-        }
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let image = info[.originalImage] as? UIImage {
-                self.parent.selectedImage = image
-            }
-            self.parent.isPresent = false
-        }
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
-    }
+}
+func cancel() {
+    cancelPressed = true
+    presentationMode.wrappedValue.dismiss()
+}
 }
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
