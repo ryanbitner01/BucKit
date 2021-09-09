@@ -17,13 +17,14 @@ class ActivityService: ObservableObject {
         fetchActvities()
     }
 
-    func addActivity(name: String) {
+    func addActivity(name: String) -> Activity {
         let newActivity = Activity(context: context)
         newActivity.name = name
         newActivity.id = UUID().uuidString
-        
         saveContext()
-    }
+        fetchActvities()
+        return newActivity
+      }
     
    func saveContext() {
         do {
