@@ -128,12 +128,7 @@ struct WorldView: View {
             })
             .navigationTitle("Map View")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button(action: showList, label: {
-                Image(systemName: "list.bullet")
-            })
-            .fullScreenCover(isPresented: $list, content: {
-                ListView()
-            }), trailing: Button(action: presentNewViewPressed, label: {
+            .navigationBarItems(leading: ,trailing: Button(action: presentNewViewPressed, label: {
                 Image(systemName: "plus")
             }))
             .fullScreenCover(isPresented: $presentNewView, content: {
