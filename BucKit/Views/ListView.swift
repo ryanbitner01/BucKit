@@ -11,16 +11,20 @@ import CoreData
 struct ListView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.editMode) var mode
-    @ObservedObject var bucketItemService: BucKitItemService
+    
+    @FetchRequest(entity: BucKitItem.entity(), sortDescriptors: [])
+    var items: FetchedResults<BucKitItem>
+    
+    @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
+    @ObservedObject var activityService: ActivityService = ActivityService()
     
     @State var detailView: Bool = false
     @State var presentDetail: Bool = false
     @State private var inactive: EditMode = EditMode.inactive
     
     var body: some View {
-        if bucketItemService.items.isEmpty {
+        if items.isEmpty {
             List {
                 NavigationLink(
                     destination: AddView(),
@@ -37,9 +41,9 @@ struct ListView: View {
                     .navigationTitle("List View")
                     .navigationBarTitleDisplayMode(.inline)
             }
-        } else {
+        }   else {
             List {
-                ForEach(bucketItemService.items, id: \.id) { result in
+                ForEach(items, id: \.id) { result in
                     NavigationLink(
                         destination: BucketItemDetailView(item: result),
                         label: {
@@ -79,11 +83,7 @@ struct ListView: View {
     }
     
     func onDelete(offsets: IndexSet) {
-        for offset in offsets {
-            let activity = bucketItemService.items[offset]
-            viewContext.delete(activity)
-        }
-        try? viewContext.save()
+
     }
 }
 
@@ -91,6 +91,6 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(bucketItemService: BucKitItemService())
+        ListView()
     }
 }
