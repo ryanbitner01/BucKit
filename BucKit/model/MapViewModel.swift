@@ -11,6 +11,8 @@ import CoreLocation
 
 class MapViewModel: NSObject,ObservableObject,CLLocationManagerDelegate {
     
+    static let shared = MapViewModel()
+    
     @Published var mapView = MKMapView()
     
     @Published var permissionDenied = false

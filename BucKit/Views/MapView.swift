@@ -9,11 +9,11 @@ import SwiftUI
 import MapKit
 
 struct MapView:  UIViewRepresentable {
-    
+
     @EnvironmentObject var mapData: MapViewModel
-    @ObservedObject var bucKitItemService: BucKitItemService
     
     let map = MKMapView()
+    var items: [BucKitItem]
     
     func makeCoordinator() -> Coordinator {
         
@@ -32,9 +32,8 @@ struct MapView:  UIViewRepresentable {
     }
     
     func getAnnotations() {
-        let bucKitItems = bucKitItemService.items
         var annotations: [MKAnnotation] = []
-        for item in bucKitItems {
+        for item in items {
             guard let latitude = item.latitude, let longitude = item.longitude else {continue}
             let name = item.name
             let subName = item.stringDate()

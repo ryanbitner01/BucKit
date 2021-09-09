@@ -9,20 +9,24 @@ import SwiftUI
 import MapKit
 import UIKit
 import CoreLocation
+import CoreData
 
 struct WorldView: View {
-    
-    @EnvironmentObject var bucKitItemService: BucKitItemService
-    
+
+    @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
+    var results: FetchedResults<BucKitItem>
+
     @State var searchBar: String = ""
     @StateObject var mapData = MapViewModel()
     @State var locationManager = CLLocationManager()
     @State private var currentLocation = CLLocationCoordinate2D()
-    
+    var items: [BucKitItem] {
+        return results.map({$0})
+    }
     var body: some View {
         NavigationView {
             ZStack {
-                MapView(bucKitItemService: bucKitItemService)
+                MapView(items: items)
                     .environmentObject(mapData)
                     .ignoresSafeArea(.all, edges: .all)
                 

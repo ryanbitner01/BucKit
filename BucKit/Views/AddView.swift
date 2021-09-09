@@ -12,11 +12,13 @@ struct AddView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var viewContext
-    @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
-    @ObservedObject var activityService: ActivityService = ActivityService()
+    
+    @FetchRequest(entity: BucKitItem.entity(), sortDescriptors: [])
+    var items: FetchedResults<BucKitItem>
+    
+    private let bucketItemService = BucKitItemService()
+    private let activityService = ActivityService()
 
-    @State private var cancelPressed = false
-    @State private var addPressed = false
     @State private var deletePressed = false
     @State var name = ""
     @State var location = ""

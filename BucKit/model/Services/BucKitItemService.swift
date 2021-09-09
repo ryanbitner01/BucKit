@@ -14,9 +14,8 @@ class BucKitItemService: ObservableObject {
     let context = CoreDataStack.shared.persistentContainer.viewContext
     
     init() {
-        fetchItems()
         
-        //Testing
+//        Testing
 //        let activity = Activity(context: context)
 //        activity.name = "Test"
 //
@@ -31,19 +30,6 @@ class BucKitItemService: ObservableObject {
         //save
         saveContext()
         
-        //reload
-        fetchItems()
-    }
-    
-    func fetchItems() {
-        do {
-            self.items = try context.fetch(BucKitItem.fetchRequest())
-            print("ITEMS")
-            print(items)
-        }
-        catch {
-            print(error)
-        }
     }
     
     func addItem(name: String, latitude: NSDecimalNumber, longitude: NSDecimalNumber, date: Date, image: Data?, id: UUID, activities: [Activity]) {
@@ -59,8 +45,6 @@ class BucKitItemService: ObservableObject {
 //         save
         saveContext()
         
-//         reload
-        fetchItems()
     }
     
     func saveContext() {
