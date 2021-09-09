@@ -12,8 +12,9 @@ struct AddView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var viewContext
-    @ObservedObject var bucketItemService: BucKitItemService
-    @ObservedObject var activityService: ActivityService
+    @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
+    @ObservedObject var activityService: ActivityService = ActivityService()
+
     @State private var cancelPressed = false
     @State private var addPressed = false
     @State private var deletePressed = false
@@ -152,7 +153,7 @@ struct AddView: View {
 }
     struct AddView_Previews: PreviewProvider {
         static var previews: some View {
-            AddView(bucketItemService: BucKitItemService(), activityService: ActivityService())
+            AddView()
         }
     }
 
