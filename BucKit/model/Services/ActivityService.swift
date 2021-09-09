@@ -38,7 +38,6 @@ class ActivityService: ObservableObject {
     func fetchActvities() {
         do {
             self.activities = try context.fetch(Activity.fetchRequest())
-            print(activities)
         }
         catch {
             print(error)
