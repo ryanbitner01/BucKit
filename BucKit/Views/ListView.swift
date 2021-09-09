@@ -13,7 +13,7 @@ struct ListView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.editMode) var mode
-    @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
+    @ObservedObject var bucketItemService: BucKitItemService
     
     @State var detailView: Bool = false
     @State var presentDetail: Bool = false
@@ -91,6 +91,6 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+        ListView(bucketItemService: BucKitItemService())
     }
 }
