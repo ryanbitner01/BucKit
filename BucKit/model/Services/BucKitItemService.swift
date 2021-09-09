@@ -9,8 +9,6 @@ import Foundation
 import CoreData
 
 class BucKitItemService: ObservableObject {
-    
-    static let shared = BucKitItemService()
 
     @Published var items: [BucKitItem] = []
     let context = CoreDataStack.shared.persistentContainer.viewContext

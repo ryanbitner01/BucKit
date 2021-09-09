@@ -12,6 +12,7 @@ struct AddView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var viewContext
+    @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
     
     @State private var cancelPressed = false
     @State private var addPressed = false
@@ -131,7 +132,7 @@ struct AddView: View {
                     Text("Cancel")
                     
                 }), trailing: Button(action: {
-                    BucKitItemService.shared.addItem(name: name, latitude: 0, longitude: 0, date: date, image: image, id: UUID(), activities: savedActivities)
+                    bucketItemService.addItem(name: name, latitude: 0, longitude: 0, date: date, image: image, id: UUID(), activities: savedActivities)
                     
                     presentationMode.wrappedValue.dismiss()
                 }) {
@@ -146,7 +147,8 @@ func addActivity() {
     newActivity.id = UUID().uuidString
     
     savedActivities.append(newActivity)
-    
+    newActivityName = ""
+
     
 }
 

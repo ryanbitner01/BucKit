@@ -13,6 +13,7 @@ struct ListView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.editMode) var mode
+    @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
     
     @State var presentNewView: Bool = false
     @State var goBack: Bool = false
@@ -21,7 +22,7 @@ struct ListView: View {
     @State private var inactive: EditMode = EditMode.inactive
     
     var body: some View {
-        if BucKitItemService.shared.items.isEmpty {
+        if bucketItemService.items.isEmpty {
             NavigationView {
                 List {
                     Button(action: presentNewViewPressed) {
@@ -56,7 +57,7 @@ struct ListView: View {
         } else {
             NavigationView {
                 List {
-                    ForEach(BucKitItemService.shared.items, id: \.id) { result in
+                    ForEach(bucketItemService.items, id: \.id) { result in
                         NavigationLink(
                             destination: BucketItemDetailView(item: result),
                             label: {
@@ -123,7 +124,7 @@ struct ListView: View {
     
     func onDelete(offsets: IndexSet) {
         for offset in offsets {
-            let activity = BucKitItemService.shared.items[offset]
+            let activity = bucketItemService.items[offset]
             viewContext.delete(activity)
         }
         try? viewContext.save()
