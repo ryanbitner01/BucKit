@@ -46,11 +46,10 @@ struct MapView:  UIViewRepresentable {
         }
         mapData.mapView.removeAnnotations(mapData.mapView.annotations)
         mapData.mapView.addAnnotations(annotations)
-        print(mapData.mapView.annotations)
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        print("Update")
+
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
@@ -61,7 +60,7 @@ struct MapView:  UIViewRepresentable {
         }
         
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-            print(mapView.centerCoordinate)
+
         }
         
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

@@ -105,6 +105,7 @@ struct WorldView: View {
                 }
                 
             }
+
             .onAppear(perform: {
                 locationManager.delegate = mapData
                 locationManager.requestWhenInUseAuthorization()

@@ -24,7 +24,6 @@ public class BucKitItem: NSManagedObject {
                 }
                 // 2
                 guard let placemark = placemarks?.first else { return }
-                print(placemark)
                 // Geary & Powell, Geary & Powell, 299 Geary St, San Francisco, CA 94102, United States @ <+37.78735352,-122.40822700> +/- 100.00m, region CLCircularRegion (identifier:'<+37.78735636,-122.40822737> radius 70.65', center:<+37.78735636,-122.40822737>, radius:70.65m)
                 // 3
                 let streetNumber = placemark.subThoroughfare ?? ""
