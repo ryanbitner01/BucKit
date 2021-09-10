@@ -10,8 +10,8 @@
         <attribute name="date" attributeType="Date" defaultDateTimeInterval="652197720" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="String" defaultValueString=""/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
-        <attribute name="latitude" attributeType="Double" defaultValueString="48.856613" usesScalarValueType="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="2.352222" usesScalarValueType="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Decimal" defaultValueString="48.856613"/>
+        <attribute name="longitude" optional="YES" attributeType="Decimal" defaultValueString="2.352222"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="list" inverseEntity="Activity"/>
     </entity>

@@ -26,11 +26,19 @@ struct AddView: View {
     @State private var savedActivities: [Activity] = [Activity]()
     @State private var newActivityName = ""
     @State private var isShowingPhotoPicker = false
+<<<<<<< HEAD
     @State private var defaultImage  = CircleImage(width: 1000, imageData: nil).uiImage
     @State private var onDefault = true
     @State private var showAlert: Bool = false
     @State private var sourceType: Int = 0
     @State private var image: Data = Data()
+=======
+    @State private var defaultImage  = CircleImage(width: 1000, image: nil).uiImage
+    @State private var onDefault = true
+    @State private var showAlert: Bool = false
+    @State private var sourceType: Int = 0
+    @State private var image = Data()
+>>>>>>> parent of 3de5611 (got location working on addview and alert)
     
     var body: some View {
         VStack(alignment: .center) {
@@ -130,7 +138,11 @@ struct AddView: View {
             .navigationTitle("Add View")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button(action: {
+<<<<<<< HEAD
                 addBucKitItem()
+=======
+                bucketItemService.addItem(name: name, latitude: 0, longitude: 0, date: date, image: image, id: UUID(), activities: savedActivities)
+>>>>>>> parent of 3de5611 (got location working on addview and alert)
                 
                 presentationMode.wrappedValue.dismiss()
             }, label: {
