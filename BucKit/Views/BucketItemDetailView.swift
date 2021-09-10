@@ -12,32 +12,34 @@ struct BucketItemDetailView: View {
     
     @ObservedObject var item: BucKitItem
     @State var activities: [Activity] = []
-        
+    
     var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .center ,spacing: 25) {
-                CircleImage(width: geometry.size.width * 0.45, imageData: nil)
-                    .padding()
-                VStack {
-                    Text("Name: \(item.name)")
-                    .padding()
-                    Text("Date: \(item.stringDate())")
-                    .padding()
-                    
-                Text("Location: \(item.address)")
-                }
-                Section {
-                    VStack(alignment: .leading) {
-                        Text("Activities")
-                            .font(.title2)
+        ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
+            GeometryReader { geometry in
+                VStack(alignment: .center ,spacing: 25) {
+                    CircleImage(width: geometry.size.width * 0.45, imageData: nil)
+                        .padding()
+                    VStack {
+                        Text("Name: \(item.name)")
                             .padding()
-                        List(Array(item.activities), id: \.id) {
-                            Text("\($0.name)")
+                        Text("Date: \(item.stringDate())")
+                            .padding()
+                        
+                        Text("Location: \(item.address)")
+                    }
+                    Section {
+                        VStack(alignment: .leading) {
+                            Text("Activities")
+                                .font(.title2)
+                                .padding()
+                            List(Array(item.activities), id: \.id) {
+                                Text("\($0.name)")
+                            }
                         }
                     }
                 }
-            }
-        } .onAppear {item.loadPlaceMark() }
+            } .onAppear {item.loadPlaceMark() }
+        }
     }
 }
 

@@ -25,15 +25,11 @@ struct RegularListView: View {
                         VStack {
                             HStack {
                                 CircleImage(width: 50, imageData: result.image)
+                                Spacer()
                                 Text("\(result.name )")
                                     .font(.system(size: 14))
-                                Divider()
-                                Spacer(minLength: 10)
-//                                    Text("\(results ?? "Error")")
-                                    .font(.system(size: 14))
                                 Spacer()
-                                Divider()
-                                Text("Not Completed")
+                                Text("\(result.stringDate())")
                                     .padding()
                             }
                         }
