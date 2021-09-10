@@ -16,7 +16,7 @@ struct BucketItemDetailView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center ,spacing: 25) {
-                CircleImage(width: geometry.size.width * 0.45, image: nil)
+                CircleImage(width: geometry.size.width * 0.45, imageData: nil)
                     .padding()
                 VStack {
                     Text("Name: \(item.name)")
