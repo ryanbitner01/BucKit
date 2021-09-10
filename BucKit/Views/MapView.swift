@@ -12,6 +12,9 @@ struct MapView:  UIViewRepresentable {
 
     @EnvironmentObject var mapData: MapViewModel
     
+    @Binding var isShowingDetail: Bool
+    @Binding var selectedItem: MKPointAnnotation?
+    
     let map = MKMapView()
     var items: [BucKitItem]
     
@@ -34,13 +37,12 @@ struct MapView:  UIViewRepresentable {
     func getAnnotations() {
         var annotations: [MKAnnotation] = []
         for item in items {
-            guard let latitude = item.latitude, let longitude = item.longitude else {continue}
             let name = item.name
             let subName = item.stringDate()
             let annotation = MKPointAnnotation()
             annotation.subtitle = subName
             annotation.title = name
-            annotation.coordinate = CLLocationCoordinate2D(latitude: latitude.doubleValue, longitude: longitude.doubleValue)
+            annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
             
             annotations.append(annotation)
         }
@@ -81,6 +83,9 @@ struct MapView:  UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            guard let pointAnnotation = view.annotation as? MKPointAnnotation else {return}
+            parent.selectedItem = pointAnnotation
+            parent.isShowingDetail = true
 
         }
     }

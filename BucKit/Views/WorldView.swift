@@ -15,18 +15,23 @@ struct WorldView: View {
 
     @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
     var results: FetchedResults<BucKitItem>
+    
+    let bucKitItemService = BucKitItemService()
 
     @State var searchBar: String = ""
     @StateObject var mapData = MapViewModel()
     @State var locationManager = CLLocationManager()
     @State private var currentLocation = CLLocationCoordinate2D()
+    @State var isShowingDetail = false
+    @State var isShowingDetailAlert = false
+    @State var selectedItem: MKPointAnnotation? = nil
     var items: [BucKitItem] {
         return results.map({$0})
     }
     var body: some View {
         NavigationView {
             ZStack {
-                MapView(items: items)
+                MapView(isShowingDetail: $isShowingDetailAlert, selectedItem: $selectedItem, items: items)
                     .environmentObject(mapData)
                     .ignoresSafeArea(.all, edges: .all)
                 
@@ -142,6 +147,19 @@ struct WorldView: View {
                                         }))
             
         }
+        .alert(isPresented: $isShowingDetailAlert, content: {
+            Alert(title: Text(selectedItem?.title ?? "Unknown"), message: Text(selectedItem?.subtitle ?? "Missing place information."), primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Show Detail")) {
+                    isShowingDetail = true
+                })
+        })
+        .sheet(isPresented: $isShowingDetail, content: {
+            BucketItemDetailView(item: getBucKitItem()!)
+        })
+    }
+    
+    func getBucKitItem() -> BucKitItem? {
+        guard let lat = selectedItem?.coordinate.latitude, let long = selectedItem?.coordinate.longitude else {return nil}
+        return bucKitItemService.getBucKitItem(lat: lat, long: long, items: items)
     }
 }
 

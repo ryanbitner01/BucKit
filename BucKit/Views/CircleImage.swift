@@ -23,17 +23,18 @@ struct CircleImage: View {
         
         Image(uiImage: uiImage)
             .resizable()
-            .frame(minWidth: 50, idealWidth: width, maxWidth: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .frame(width: width > 150 ? 150: width, height: width > 150 ? 150: width, alignment: .center)
             .aspectRatio(contentMode: .fit)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.primary, lineWidth: 1).shadow(radius: 50))
+            
     }
 }
 
 struct CircleImage_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CircleImage(width: 200, imageData: nil)
+            CircleImage(width: 50, imageData: nil)
         }
     }
 }

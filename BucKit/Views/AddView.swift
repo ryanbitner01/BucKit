@@ -30,7 +30,7 @@ struct AddView: View {
     @State private var onDefault = true
     @State private var showAlert: Bool = false
     @State private var sourceType: Int = 0
-    @State private var image = Data()
+    @State private var image: Data = Data()
     
     var body: some View {
         VStack(alignment: .center) {
@@ -130,7 +130,7 @@ struct AddView: View {
             .navigationTitle("Add View")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button(action: {
-                bucketItemService.addItem(name: name, latitude: 0, longitude: 0, date: date, image: image, id: UUID(), activities: savedActivities)
+                addBucKitItem()
                 
                 presentationMode.wrappedValue.dismiss()
             }, label: {
@@ -138,6 +138,11 @@ struct AddView: View {
             }))
         }
     }
+    
+    func addBucKitItem() {
+        bucketItemService.addItem(name: name, latitude: 0, longitude: 0, date: date, image: nil, id: UUID(), activities: savedActivities)
+    }
+    
     func addActivity() {
         
         let newActivity = activityService.addActivity(name: newActivityName)
