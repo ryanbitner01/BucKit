@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		1E22949526E128F60036DF4C /* BucKitItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22949426E128F60036DF4C /* BucKitItemService.swift */; };
 		1E804AA726E7A99A000FAB5D /* BucKitItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E804AA326E7A99A000FAB5D /* BucKitItem+CoreDataClass.swift */; };
+		1E804AA826E7A99A000FAB5D /* BucKitItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E804AA426E7A99A000FAB5D /* BucKitItem+CoreDataProperties.swift */; };
 		1EA3998E26D937E7002B52A5 /* BucketItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */; };
 		1EA3999026D9D205002B52A5 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3998F26D9D205002B52A5 /* CircleImage.swift */; };
 		1EAA61EB26E7B06E008CA013 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA61EA26E7B06E008CA013 /* ActivityService.swift */; };
 		1EAA61EE26E7B47C008CA013 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA61EC26E7B47C008CA013 /* Activity+CoreDataClass.swift */; };
 		1EAA61EF26E7B47C008CA013 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA61ED26E7B47C008CA013 /* Activity+CoreDataProperties.swift */; };
-		1EBCC33626EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBCC33426EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift */; };
 		3C54861226D7ED2700CBF23D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C54861126D7ED2700CBF23D /* Preview Assets.xcassets */; };
 		3C54862C26D7EE1B00CBF23D /* WorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C54862B26D7EE1B00CBF23D /* WorldView.swift */; };
 		3C54865026D7EFFD00CBF23D /* BucKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C54864F26D7EFFD00CBF23D /* BucKitApp.swift */; };
@@ -33,12 +33,12 @@
 /* Begin PBXFileReference section */
 		1E22949426E128F60036DF4C /* BucKitItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucKitItemService.swift; sourceTree = "<group>"; };
 		1E804AA326E7A99A000FAB5D /* BucKitItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BucKitItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1E804AA426E7A99A000FAB5D /* BucKitItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BucKitItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1EA3998D26D937E7002B52A5 /* BucketItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketItemDetailView.swift; sourceTree = "<group>"; };
 		1EA3998F26D9D205002B52A5 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		1EAA61EA26E7B06E008CA013 /* ActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		1EAA61EC26E7B47C008CA013 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		1EAA61ED26E7B47C008CA013 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		1EBCC33426EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BucKitItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		3C54860726D7ED2400CBF23D /* BucKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C54861126D7ED2700CBF23D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3C54862B26D7EE1B00CBF23D /* WorldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldView.swift; sourceTree = "<group>"; };
@@ -79,10 +79,10 @@
 		1E22949F26E7A4AC0036DF4C /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				1EBCC33426EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift */,
 				1EAA61EC26E7B47C008CA013 /* Activity+CoreDataClass.swift */,
 				1EAA61ED26E7B47C008CA013 /* Activity+CoreDataProperties.swift */,
 				1E804AA326E7A99A000FAB5D /* BucKitItem+CoreDataClass.swift */,
+				1E804AA426E7A99A000FAB5D /* BucKitItem+CoreDataProperties.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -255,11 +255,11 @@
 				3C9B869526DBFC99009FA683 /* MapViewModel.swift in Sources */,
 				3C9B869726DC1B81009FA683 /* Place.swift in Sources */,
 				3C54862C26D7EE1B00CBF23D /* WorldView.swift in Sources */,
-				1EBCC33626EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift in Sources */,
 				1EAA61EB26E7B06E008CA013 /* ActivityService.swift in Sources */,
 				1EA3999026D9D205002B52A5 /* CircleImage.swift in Sources */,
 				1EAA61EF26E7B47C008CA013 /* Activity+CoreDataProperties.swift in Sources */,
 				3C54865026D7EFFD00CBF23D /* BucKitApp.swift in Sources */,
+				1E804AA826E7A99A000FAB5D /* BucKitItem+CoreDataProperties.swift in Sources */,
 				3C887A4926D9354B00D68906 /* AddView.swift in Sources */,
 				3C887A8B26DB433500D68906 /* ActivityController.swift in Sources */,
 				1E804AA726E7A99A000FAB5D /* BucKitItem+CoreDataClass.swift in Sources */,
