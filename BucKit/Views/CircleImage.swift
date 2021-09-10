@@ -11,15 +11,7 @@ import SwiftUI
 struct CircleImage: View {
     let width: CGFloat
     let image: String?
-    var imageURL: URL? {
-        guard let image = image else {return nil}
-        return URL(string: image)
-    }
-    
-    var imageData: Data? {
-        guard let url = imageURL else {return nil}
-        return try? Data(contentsOf: url)
-    }
+    var imageData: Data?
     
     var uiImage: UIImage {
         if let imageData = imageData, let uiImage = UIImage(data: imageData) {
