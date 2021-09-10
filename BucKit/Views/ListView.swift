@@ -24,6 +24,7 @@ struct RegularListView: View {
                     label: {
                         VStack {
                             HStack {
+                                CircleImage(width: 50, image: result.image)
                                 Text("\(result.name )")
                                     .font(.system(size: 14))
                                 Divider()
