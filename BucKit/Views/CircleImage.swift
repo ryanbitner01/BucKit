@@ -10,7 +10,6 @@ import SwiftUI
 // Used to make a circular image
 struct CircleImage: View {
     let width: CGFloat
-    let image: String?
     var imageData: Data?
     
     var uiImage: UIImage {
@@ -34,7 +33,7 @@ struct CircleImage: View {
 struct CircleImage_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CircleImage(width: 200, image: nil)
+            CircleImage(width: 200, imageData: nil)
         }
     }
 }

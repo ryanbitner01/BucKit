@@ -26,7 +26,7 @@ struct AddView: View {
     @State private var savedActivities: [Activity] = [Activity]()
     @State private var newActivityName = ""
     @State private var isShowingPhotoPicker = false
-    @State private var defaultImage  = CircleImage(width: 1000, image: nil).uiImage
+    @State private var defaultImage  = CircleImage(width: 1000, imageData: nil).uiImage
     @State private var onDefault = true
     @State private var showAlert: Bool = false
     @State private var sourceType: Int = 0
