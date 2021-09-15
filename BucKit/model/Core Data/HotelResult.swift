@@ -8,14 +8,14 @@
 import Foundation
 
 struct SearchResults: Codable {
-    var results: [Results]
+    var results: Results
 }
 
 struct Results: Codable {
-    var hotels: [Hotel]
+    var hotels: [HotelResult]
 }
 
-struct Hotel: Codable {
+struct HotelResult: Codable {
     var name: String
     var ratePlan: RatePlan
 }
