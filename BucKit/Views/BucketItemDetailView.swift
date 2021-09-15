@@ -11,7 +11,6 @@ import MapKit
 struct BucketItemDetailView: View {
     
     @ObservedObject var item: BucKitItem
-    @State var activities: [Activity] = []
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
@@ -27,19 +26,32 @@ struct BucketItemDetailView: View {
                         
                         Text("Location: \(item.address)")
                     }
-                    Section {
-                        VStack(alignment: .leading) {
-                            Text("Activities")
-                                .font(.title2)
-                                .padding()
-                            List(Array(item.activities), id: \.id) {
-                                Text("\($0.name)")
+                    VStack(alignment: .center) {
+                        Text("Activities")
+                            .font(.title2)
+                            .padding()
+
+                    }
+
+                    VStack (alignment: .leading) {
+                        ForEach(arrayOfActivities()) {activity in
+                            HStack {
+                                Image(systemName: "circle.fill")
+                                Text(activity.name)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                             }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
                         }
                     }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             } .onAppear {item.loadPlaceMark() }
         }
+    }
+    
+    func arrayOfActivities() -> [Activity] {
+        return item.activities.map({$0})
     }
 }
 

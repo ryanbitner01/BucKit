@@ -40,7 +40,7 @@ class BucKitItemService: ObservableObject {
         newBucKitItem.longitude = longitude
         newBucKitItem.date = date
         newBucKitItem.image = image
-        newBucKitItem.id = id.uuidString
+        newBucKitItem.id = UUID().uuidString
         newBucKitItem.addToActivities(NSSet(array: activities))
 //         save
         saveContext()
