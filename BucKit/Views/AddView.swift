@@ -18,27 +18,20 @@ struct AddView: View {
     
     private let bucketItemService = BucKitItemService()
     private let activityService = ActivityService()
+    private let locationService = LocationService()
 
     @State private var deletePressed = false
     @State var name = ""
-    @State var location = ""
+    @State var locationString = ""
     @State var date = Date()
     @State private var savedActivities: [Activity] = [Activity]()
     @State private var newActivityName = ""
     @State private var isShowingPhotoPicker = false
-<<<<<<< HEAD
     @State private var defaultImage  = CircleImage(width: 1000, imageData: nil).uiImage
     @State private var onDefault = true
     @State private var showAlert: Bool = false
     @State private var sourceType: Int = 0
     @State private var image: Data = Data()
-=======
-    @State private var defaultImage  = CircleImage(width: 1000, image: nil).uiImage
-    @State private var onDefault = true
-    @State private var showAlert: Bool = false
-    @State private var sourceType: Int = 0
-    @State private var image = Data()
->>>>>>> parent of 3de5611 (got location working on addview and alert)
     
     var body: some View {
         VStack(alignment: .center) {
@@ -62,9 +55,6 @@ struct AddView: View {
                 .sheet(isPresented: $isShowingPhotoPicker, content: {
                     ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
                 })
-                if showAlert {
-                    
-                }
             }
             
             HStack {
@@ -73,32 +63,31 @@ struct AddView: View {
                     .font(.system(size: 19))
                 Spacer(minLength: 45)
                 TextField("Enter goal name", text: $name)
-                    .contentShape(Rectangle())
-                    .multilineTextAlignment(.center)
-                    .frame(height: 10)
-                    .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 14)
-                            .stroke(Color.blue, lineWidth: 2))
-                    
-                    .padding()
             }
+            .contentShape(Rectangle())
+            .multilineTextAlignment(.center)
+            .frame(height: 10)
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 14)
+                    .stroke(Color.blue, lineWidth: 2))
+            
+            .padding()
             HStack {
                 Spacer(minLength: 10)
                 Text("Location:")
                     .font(.system(size: 20))
                 Spacer(minLength: 25)
-                TextField("Enter location name", text: $location)
-                    .contentShape(Rectangle())
-                    .frame(height: 10)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 14)
-                            .stroke(Color.blue, lineWidth: 2))
-                    .padding()
+                TextField("Enter location name", text: $locationString)
             }
-            
+            .contentShape(Rectangle())
+            .frame(height: 10)
+            .multilineTextAlignment(.center)
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 14)
+                    .stroke(Color.blue, lineWidth: 2))
+            .padding()
             HStack {
                 Spacer(minLength: 10)
                 Text("Goal Date:")
@@ -138,12 +127,15 @@ struct AddView: View {
             .navigationTitle("Add View")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button(action: {
-<<<<<<< HEAD
-                addBucKitItem()
-=======
-                bucketItemService.addItem(name: name, latitude: 0, longitude: 0, date: date, image: image, id: UUID(), activities: savedActivities)
->>>>>>> parent of 3de5611 (got location working on addview and alert)
-                
+                locationService.tryToSave(location: locationString) { result in
+                    switch result {
+                    
+                    case .success(let location):
+                        addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    case .failure(_):
+                        print("Failed to save")
+                    }
+                }
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Save")
@@ -151,8 +143,8 @@ struct AddView: View {
         }
     }
     
-    func addBucKitItem() {
-        bucketItemService.addItem(name: name, latitude: 0, longitude: 0, date: date, image: nil, id: UUID(), activities: savedActivities)
+    func addBucKitItem(latitude: Double, longitude: Double) {
+        bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: nil, id: UUID(), activities: savedActivities, location: locationString)
     }
     
     func addActivity() {
