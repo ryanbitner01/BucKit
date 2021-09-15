@@ -7,25 +7,26 @@
 
 import Foundation
 
-struct SearchResults {
+struct SearchResults: Codable {
     var results: [Results]
 }
 
-struct Results {
+struct Results: Codable {
     var hotels: [Hotel]
 }
 
-struct Hotel {
+struct Hotel: Codable {
     var name: String
     var ratePlan: RatePlan
 }
 
-struct RatePlan {
+struct RatePlan: Codable {
     var price: Price
 }
 
-struct Price {
+struct Price: Codable {
     var current: String
     var info: String
-    var additionalInfo: 
+    var additionalInfo: String
+    var fullyBundledPriceString: String
 }
