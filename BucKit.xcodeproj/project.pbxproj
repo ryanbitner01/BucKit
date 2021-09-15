@@ -16,6 +16,7 @@
 		1EAA61EF26E7B47C008CA013 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA61ED26E7B47C008CA013 /* Activity+CoreDataProperties.swift */; };
 		1EB47C5226F236F40011ECF6 /* HotelNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB47C5126F236F40011ECF6 /* HotelNetworkService.swift */; };
 		1EB47C5426F241350011ECF6 /* HotelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB47C5326F241350011ECF6 /* HotelResult.swift */; };
+		1EB47C5626F250270011ECF6 /* Hotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB47C5526F250270011ECF6 /* Hotel.swift */; };
 		1EBCC33626EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBCC33426EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift */; };
 		1EBCC37826EFAC4E00E9BED8 /* TravelPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBCC37726EFAC4E00E9BED8 /* TravelPlanner.swift */; };
 		3C54861226D7ED2700CBF23D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C54861126D7ED2700CBF23D /* Preview Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		1EAA61ED26E7B47C008CA013 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1EB47C5126F236F40011ECF6 /* HotelNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelNetworkService.swift; sourceTree = "<group>"; };
 		1EB47C5326F241350011ECF6 /* HotelResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelResult.swift; sourceTree = "<group>"; };
+		1EB47C5526F250270011ECF6 /* Hotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotel.swift; sourceTree = "<group>"; };
 		1EBCC33426EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BucKitItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1EBCC37726EFAC4E00E9BED8 /* TravelPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelPlanner.swift; sourceTree = "<group>"; };
 		3C54860726D7ED2400CBF23D /* BucKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 				1E804AA326E7A99A000FAB5D /* BucKitItem+CoreDataClass.swift */,
 				3C69BFBA26EBCD5D00E5DF62 /* BucKitItem+CoreDataProperties.swift */,
 				1EB47C5326F241350011ECF6 /* HotelResult.swift */,
+				1EB47C5526F250270011ECF6 /* Hotel.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				3CBADFBC26DD33FC00F92E23 /* Persistence.swift in Sources */,
 				3C9B869326DBFB19009FA683 /* MapView.swift in Sources */,
 				3C69BFB926EBCCF800E5DF62 /* LocationService.swift in Sources */,
+				1EB47C5626F250270011ECF6 /* Hotel.swift in Sources */,
 				3CBADF9A26DC848000F92E23 /* ListView.swift in Sources */,
 				1E22949526E128F60036DF4C /* BucKitItemService.swift in Sources */,
 				1EA3998E26D937E7002B52A5 /* BucketItemDetailView.swift in Sources */,
