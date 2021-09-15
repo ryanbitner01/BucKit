@@ -20,8 +20,8 @@ extension BucKitItem {
     @NSManaged public var date: Date
     @NSManaged public var id: String
     @NSManaged public var image: Data?
-    @NSManaged public var latitude: Double
-    @NSManaged public var longitude: Double
+    @NSManaged public var latitude: NSDecimalNumber?
+    @NSManaged public var longitude: NSDecimalNumber?
     @NSManaged public var name: String
     @NSManaged public var location: String
     @NSManaged public var activities: Set<Activity>
