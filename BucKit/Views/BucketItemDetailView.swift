@@ -44,6 +44,7 @@ struct BucketItemDetailView: View {
                             .padding(.vertical, 10)
                         }
                     }
+                    NavigationLink("Travel Planner", destination: TravelPlanner(item: item))
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } .onAppear {item.loadPlaceMark() }
