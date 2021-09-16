@@ -9,8 +9,12 @@ import Foundation
 
 class HotelNetworkService {
             
-    func searchHotels(_ item: BucKitItem, adults: String, checkinDate: String, checkoutDate: String, completion: @escaping (Result<[HotelResult], Error>) -> Void) {
+    func searchHotels(_ item: BucKitItem, adults: String, checkinDate: Date, checkoutDate: Date, completion: @escaping (Result<[HotelResult], Error>) -> Void) {
         let baseURL = "https://hotels-com-provider.p.rapidapi.com/v1/hotels/nearby"
+        let checkinDate = stringDate(date: checkinDate)
+        let checkoutDate = stringDate(date: checkoutDate)
+        let headerKey = "x-rapidapi-key"
+        let key = "ae38a128fbmsh272f961ad7e71ecp1fa023jsn85d8c8ca253b"
         guard var urlComp = URLComponents(string: baseURL) else {return}
         let lat = String(item.latitude)
         let long = String(item.longitude)
@@ -25,16 +29,31 @@ class HotelNetworkService {
             URLQueryItem(name: "currency", value: "USD")
         ]
         urlComp.queryItems = queryItems
-        let session = URLSession.shared.dataTask(with: urlComp.url!) { (data, response, error) in
+        
+        var request = URLRequest(url: urlComp.url!)
+        request.addValue(key, forHTTPHeaderField: headerKey)
+        
+        let session = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print(error)
                 completion(.failure(error))
             } else if let data = data {
                 let decoder = JSONDecoder()
-                let results = try? decoder.decode(SearchResults.self, from: data)
-                completion(.success(results?.results.hotels ?? []))
+                do {
+                    let results = try decoder.decode(SearchResults.self, from: data)
+                    completion(.success(results.searchResults.results))
+                } catch {
+                    completion(.failure(error))
+                }
             }
         }
         session.resume()
+    }
+    
+    func stringDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en_US")
+        return dateFormatter.string(from: date)
     }
 }

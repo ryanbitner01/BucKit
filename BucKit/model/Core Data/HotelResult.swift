@@ -8,11 +8,11 @@
 import Foundation
 
 struct SearchResults: Codable {
-    var results: Results
+    var searchResults: Results
 }
 
 struct Results: Codable {
-    var hotels: [HotelResult]
+    var results: [HotelResult]
 }
 
 struct HotelResult: Codable {
@@ -26,7 +26,5 @@ struct RatePlan: Codable {
 
 struct Price: Codable {
     var current: String
-    var info: String
-    var additionalInfo: String
-    var fullyBundledPriceString: String
+    var fullyBundledPricePerStay: String?
 }
