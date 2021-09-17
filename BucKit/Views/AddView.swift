@@ -31,23 +31,13 @@ struct AddView: View {
     @State private var onDefault = true
     @State private var showAlert: Bool = false
     @State private var sourceType: Int = 0
-    @State private var image: Data = Data()
+    @State private var image: Data?
     
     var body: some View {
         VStack(alignment: .center) {
             VStack {
                 Spacer()
-                if onDefault == true {
-                    Image(uiImage: defaultImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                } else {
-                    Image(uiImage: defaultImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                }
+                CircleImage(width: 250, imageData: image != nil ? image: nil )
                 Button("Change Image", action: {
                     self.isShowingPhotoPicker.toggle()
                 })
@@ -144,7 +134,7 @@ struct AddView: View {
     }
     
     func addBucKitItem(latitude: Double, longitude: Double) {
-        bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: nil, id: UUID(), activities: savedActivities, location: locationString)
+    bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: nil, id: UUID(), activities: savedActivities, location: locationString)
     }
     
     func addActivity() {
