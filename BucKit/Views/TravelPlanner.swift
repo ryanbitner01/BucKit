@@ -14,7 +14,8 @@ struct TravelPlanner: View {
     var hotelNetworkService = HotelNetworkService()
     @State var numOfAdults = 1
     @State private var checkinDate = Date()
-    @State private var checkoutDate = Date()
+    @State private var checkoutDate = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+    let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
     
     var body: some View {
         Form {
@@ -23,13 +24,17 @@ struct TravelPlanner: View {
             }
             Section {
                 Stepper("Number of Adults: \(numOfAdults)", value: $numOfAdults, in: 1...5)
-                DatePicker("Check-in Date", selection: $checkinDate, displayedComponents: .date)
-                DatePicker("Check-out Date", selection: $checkoutDate, displayedComponents: .date)
+                DatePicker("Check-in Date", selection: $checkinDate, in: Date()..., displayedComponents: .date)
+                    
+                DatePicker("Check-out Date", selection: $checkoutDate, in: tomorrow... ,displayedComponents: .date)
             }
             Section {
                 Button(action: getHotels, label: {
                     Text("Get Hotels")
                 })
+            }
+            Section {
+                HotelList(hotels: hotels)
             }
         }
     }
