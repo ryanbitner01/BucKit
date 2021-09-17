@@ -16,7 +16,7 @@ struct BucketItemDetailView: View {
         ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
             GeometryReader { geometry in
                 VStack(alignment: .center ,spacing: 25) {
-                    CircleImage(width: geometry.size.width * 0.45, imageData: nil)
+                    CircleImage(width: geometry.size.width * 0.45, imageData: item.image)
                         .padding()
                     VStack {
                         Text("Name: \(item.name)")
