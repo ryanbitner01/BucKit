@@ -134,7 +134,7 @@ struct AddView: View {
     }
     
     func addBucKitItem(latitude: Double, longitude: Double) {
-    bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: nil, id: UUID(), activities: savedActivities, location: locationString)
+        bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: image, id: UUID(), activities: savedActivities, location: locationString)
     }
     
     func addActivity() {
