@@ -14,6 +14,7 @@ struct RegularListView: View {
     
     @State private var inactive: EditMode = EditMode.inactive
     
+    let bucKitItemService = BucKitItemService()
     var items: [BucKitItem]
     
     var body: some View {
@@ -54,7 +55,11 @@ struct RegularListView: View {
     }
     
     func onDelete(offsets: IndexSet) {
-
+        guard let firstIndex = offsets.first else {return}
+        let item = items[firstIndex]
+        // Delete from core data
+        bucKitItemService.removeItem(bucKitItem: item)
+        
     }
 }
 

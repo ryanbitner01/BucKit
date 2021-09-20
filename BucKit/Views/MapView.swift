@@ -29,7 +29,6 @@ struct MapView:  UIViewRepresentable {
         
         view.showsUserLocation = true
         view.delegate = context.coordinator
-        getAnnotations()
         return view
         
     }
@@ -51,7 +50,7 @@ struct MapView:  UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-
+        getAnnotations()
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
