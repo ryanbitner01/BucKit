@@ -11,43 +11,51 @@ import MapKit
 struct BucketItemDetailView: View {
     
     @ObservedObject var item: BucKitItem
-    
+    @State var AddViewWithNavBarIsShown = false
     var body: some View {
-        ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
-            GeometryReader { geometry in
-                VStack(alignment: .center ,spacing: 25) {
-                    CircleImage(width: geometry.size.width * 0.45, imageData: item.image)
-                        .padding()
-                    VStack {
-                        Text("Name: \(item.name)")
+            ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
+                GeometryReader { geometry in
+                    VStack(alignment: .center ,spacing: 25) {
+                        CircleImage(width: geometry.size.width * 0.45, imageData: item.image)
                             .padding()
-                        Text("Date: \(item.stringDate())")
-                            .padding()
-                        
-                        Text("Location: \(item.address)")
-                    }
-                    VStack(alignment: .center) {
-                        Text("Activities")
-                            .font(.title2)
-                            .padding()
-
-                    }
-
-                    VStack (alignment: .leading) {
-                        ForEach(arrayOfActivities()) {activity in
-                            HStack {
-                                Image(systemName: "circle.fill")
-                                Text(activity.name)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 10)
+                        VStack {
+                            Text("Name: \(item.name)")
+                                .padding()
+                            Text("Date: \(item.stringDate())")
+                                .padding()
+                            
+                            Text("Location: \(item.location)")
                         }
+                        VStack(alignment: .center) {
+                            Text("Activities")
+                                .font(.title2)
+                                .padding()
+                            
+                        }
+                        
+                        VStack (alignment: .leading) {
+                            ForEach(arrayOfActivities()) {activity in
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                    Text(activity.name)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 10)
+                            }
+                        }
+                        NavigationLink("Travel Planner", destination: TravelPlanner(item: item))
                     }
-                    NavigationLink("Travel Planner", destination: TravelPlanner(item: item))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } .onAppear {item.loadPlaceMark() }
+                .navigationBarItems(trailing: Button(action: {
+                    self.AddViewWithNavBarIsShown.toggle()
+                }) {
+                    Text("Edit")
+                }.fullScreenCover(isPresented: $AddViewWithNavBarIsShown) {
+                    AddViewWithNavigationBar(buckitItem: item)
+                })
+                .onAppear { item.loadPlaceMark() }
         }
     }
     

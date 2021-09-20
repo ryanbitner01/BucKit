@@ -19,7 +19,7 @@ struct AddView: View {
     private let bucketItemService = BucKitItemService()
     private let activityService = ActivityService()
     private let locationService = LocationService()
-
+    
     @State private var deletePressed = false
     @State var name = ""
     @State var locationString = ""
@@ -132,33 +132,31 @@ struct AddView: View {
             }))
         }
     }
-    
     func addBucKitItem(latitude: Double, longitude: Double) {
         bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: image, id: UUID(), activities: savedActivities, location: locationString)
-    func addBucKitItem(latitude: Double, longitude: Double) {
-        bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: nil, id: UUID(), activities: savedActivities, location: locationString)
     }
-    
-    func addActivity() {
         
-        let newActivity = activityService.addActivity(name: newActivityName)
-        
-        savedActivities.append(newActivity)
-        newActivityName = ""
-        
-    }
-    
-    func deleteActivity(activity: Activity) {
-        if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
-            savedActivities.remove(at: index)
+        func addActivity() {
+            
+            let newActivity = activityService.addActivity(name: newActivityName)
+            
+            savedActivities.append(newActivity)
+            newActivityName = ""
+            
         }
+        
+        func deleteActivity(activity: Activity) {
+            if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
+                savedActivities.remove(at: index)
+            }
+        }
+    }
+
+struct AddView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddView()
     }
 }
-    struct AddView_Previews: PreviewProvider {
-        static var previews: some View {
-            AddView()
-        }
-    }
 
 
 
