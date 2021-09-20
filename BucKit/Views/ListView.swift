@@ -54,7 +54,7 @@ struct RegularListView: View {
     }
     
     func onDelete(offsets: IndexSet) {
-
+        
     }
 }
 
