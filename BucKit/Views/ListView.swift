@@ -16,9 +16,10 @@ struct RegularListView: View {
     
     let bucKitItemService = BucKitItemService()
     var items: [BucKitItem]
-    
+
     var body: some View {
         List {
+            if items.count > 0 {
             ForEach(items, id: \.id) { result in
                 NavigationLink(
                     destination: BucketItemDetailView(item: result),
@@ -38,6 +39,8 @@ struct RegularListView: View {
                 }
             .onDelete(perform: onDelete)
             .deleteDisabled(!self.inactive.isEditing)
+            }
+            
         }
         .navigationTitle("List View")
         .navigationBarTitleDisplayMode(.inline)
@@ -93,10 +96,6 @@ struct ListView: View {
     @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
     var results: FetchedResults<BucKitItem>
     
-    var items: [BucKitItem] {
-        results.map({$0})
-    }
-    
     @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
     @ObservedObject var activityService: ActivityService = ActivityService()
     
@@ -105,11 +104,17 @@ struct ListView: View {
     @State private var inactive: EditMode = EditMode.inactive
     
     var body: some View {
-        if items.isEmpty {
-            EmptyActivitiesListView()
-        } else {
-            RegularListView(items: items)
-        }
+        RegularListView(items: Array(results))
+//        let resultsArray = Array(results)
+//        if resultsArray.isEmpty {
+//            EmptyActivitiesListView()
+//        } else {
+//            //EmptyActivitiesListView()
+//            if resultsArray.count == 0 {
+//                EmptyActivitiesListView()
+//            }
+//            RegularListView(items: resultsArray)
+//        }
     }
     
     
