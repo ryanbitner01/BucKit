@@ -16,6 +16,12 @@ class ActivityService: ObservableObject {
     init() {
         fetchActvities()
     }
+    
+    func deleteActivity(activity: Activity) {
+        context.delete(activity)
+        
+        saveContext()
+    }
 
     func addActivity(name: String) -> Activity {
         let newActivity = Activity(context: context)

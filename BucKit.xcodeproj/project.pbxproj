@@ -116,11 +116,20 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		1EB47CA526F8C9450011ECF6 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				1EBCC33426EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		3C5485FE26D7ED2400CBF23D = {
 			isa = PBXGroup;
 			children = (
 				3C54860926D7ED2400CBF23D /* BucKit */,
 				3C54860826D7ED2400CBF23D /* Products */,
+				1EB47CA526F8C9450011ECF6 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
