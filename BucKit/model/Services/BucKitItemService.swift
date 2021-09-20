@@ -24,10 +24,8 @@ class BucKitItemService: ObservableObject {
 //        addItem(name: "Paris", latitude: 48.856613, longitude: 2.352222, date: Date(), image: nil, id: UUID(), activities: [activity])
     }
     
-    func removeItems(bucKitItems: [BucKitItem]) {
-        for item in bucKitItems {
-            context.delete(item)
-        }
+    func removeItem(bucKitItem: BucKitItem) {
+        context.delete(bucKitItem)
         
         //save
         saveContext()
