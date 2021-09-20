@@ -152,8 +152,8 @@ struct WorldView: View {
                     isShowingDetail = true
                 })
         })
-        .sheet(isPresented: $isShowingDetail, content: {
-            BucketItemDetailView(item: getBucKitItem()!)
+        .fullScreenCover(isPresented: $isShowingDetail, content: {
+            BuckitItemViewWithNavBar(item: getBucKitItem()!)
         })
     }
     
