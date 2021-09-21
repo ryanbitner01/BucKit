@@ -10,7 +10,7 @@ import SwiftUI
 struct TravelPlanner: View {
     
     @State private var hotels: [HotelResult] = []
-    var item: BucKitItem
+    @State var item: BucKitItem
     var hotelNetworkService = HotelNetworkService()
     @State var numOfAdults = 1
     @State private var checkinDate = Date()
@@ -20,7 +20,8 @@ struct TravelPlanner: View {
     var body: some View {
         Form {
             Section {
-                Text("Address: \(item.location)")
+                Text("Location: \(item.location)")
+                Text("Address: \(item.address)")
             }
             Section {
                 Stepper("Number of Adults: \(numOfAdults)", value: $numOfAdults, in: 1...5)
@@ -37,6 +38,10 @@ struct TravelPlanner: View {
                 HotelList(hotels: hotels)
             }
         }
+        .onAppear(perform: {
+            item.loadPlaceMark()
+        })
+        .navigationBarTitle("Travel Planner")
     }
     
     func getHotels() {
