@@ -32,7 +32,19 @@ class BucKitItemService: ObservableObject {
         
     }
     
-    func addItem(name: String, latitude: Double, longitude: Double, date: Date, image: Data?, id: UUID, activities: [Activity], location: String) {
+    func updateItem(_ item: BucKitItem, name: String, latitude: Double, longitude: Double, date: Date, image: Data?, activities: [Activity], location: String) {
+        item.name = name
+        item.latitude = latitude
+        item.longitude = longitude
+        item.date = date
+        item.image = image
+        item.addToActivities(NSSet(array: activities))
+        item.location = location
+        
+        saveContext()
+    }
+    
+    func addItem(name: String, latitude: Double, longitude: Double, date: Date, image: Data?, activities: [Activity], location: String) {
         // create new item
         let newBucKitItem = BucKitItem(context: context)
         newBucKitItem.name = name

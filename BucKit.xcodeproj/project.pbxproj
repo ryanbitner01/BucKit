@@ -108,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				1E22949F26E7A4AC0036DF4C /* Core Data */,
-				1E22949E26E7A4970036DF4C /* Services */,
 				3C9B869426DBFC99009FA683 /* MapViewModel.swift */,
 				3C9B869626DC1B81009FA683 /* Place.swift */,
 			);
@@ -145,6 +144,7 @@
 			children = (
 				3C54866326D7F5F400CBF23D /* Info.plist */,
 				1EA3998A26D92E91002B52A5 /* model */,
+				1E22949E26E7A4970036DF4C /* Services */,
 				3C54865226D7F09900CBF23D /* App */,
 				3C54865426D7F26D00CBF23D /* CoreData */,
 				3C54865826D7F26D00CBF23D /* Misc */,
