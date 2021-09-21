@@ -66,28 +66,6 @@ struct RegularListView: View {
     }
 }
 
-struct EmptyActivitiesListView: View {
-    
-    var body: some View {
-        List {
-            NavigationLink(
-                destination: AddView(),
-                label: {
-                    HStack {
-                        Spacer()
-                        Divider()
-                        Text("Tap Here To Add A Goal")
-                            .font(.system(.headline))
-                        Divider()
-                        Spacer()
-                    }
-                })
-                .navigationTitle("List View")
-                .navigationBarTitleDisplayMode(.inline)
-        }
-    }
-}
-
 struct ListView: View {
     
     @Environment(\.presentationMode) var presentationMode
@@ -104,17 +82,12 @@ struct ListView: View {
     @State private var inactive: EditMode = EditMode.inactive
     
     var body: some View {
-        RegularListView(items: Array(results))
-//        let resultsArray = Array(results)
-//        if resultsArray.isEmpty {
-//            EmptyActivitiesListView()
-//        } else {
-//            //EmptyActivitiesListView()
-//            if resultsArray.count == 0 {
-//                EmptyActivitiesListView()
-//            }
-//            RegularListView(items: resultsArray)
-//        }
+        let itemsArray = Array(results)
+        RegularListView(items: itemsArray)
+            .overlay(
+                Text(itemsArray.isEmpty ? "Please Press the + to add an Item": "")
+            )
+
     }
     
     
