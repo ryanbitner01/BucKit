@@ -39,7 +39,8 @@ struct BuckitItemViewWithNavBar: View {
                         VStack (alignment: .leading) {
                             ForEach(arrayOfActivities()) {activity in
                                 HStack {
-                                    Image(systemName: "circle.fill")
+                                    Image(systemName: "circle")
+                                        .foregroundColor(.accentColor)
                                     Text(activity.name)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                 }
@@ -101,7 +102,8 @@ struct BucketItemDetailView: View {
                     VStack (alignment: .leading) {
                         ForEach(arrayOfActivities()) {activity in
                             HStack {
-                                Image(systemName: "circle.fill")
+                                Image(systemName: "circle")
+                                    .foregroundColor(.accentColor)
                                 Text(activity.name)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
