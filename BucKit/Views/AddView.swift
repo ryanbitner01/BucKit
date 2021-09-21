@@ -86,6 +86,10 @@ struct AddViewWithNavigationBar: View {
                     DatePicker("", selection: $date, displayedComponents: .date)
                         .padding()
                 }
+                HStack {
+                    Image(systemName: "staroflife.fill")
+                    Text(" = Required")
+                }
                 Spacer()
                 Form {
                     HStack {
@@ -133,7 +137,7 @@ struct AddViewWithNavigationBar: View {
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("Save")
-                }))
+                })).disabled(name.isEmpty || locationString.isEmpty == true)
                 
             }
         }
@@ -218,6 +222,8 @@ struct AddView: View {
             
             HStack {
                 Spacer(minLength: 15)
+                Image(systemName: "staroflife.fill")
+                    .foregroundColor(.red)
                 Text("Name:")
                     .font(.system(size: 19))
                 Spacer(minLength: 45)
@@ -234,6 +240,8 @@ struct AddView: View {
             .padding()
             HStack {
                 Spacer(minLength: 10)
+                Image(systemName: "staroflife.fill")
+                    .foregroundColor(.red)
                 Text("Location:")
                     .font(.system(size: 20))
                 Spacer(minLength: 25)
@@ -254,6 +262,12 @@ struct AddView: View {
                 Spacer(minLength: 105)
                 DatePicker("", selection: $date, displayedComponents: .date)
                     .padding()
+            }
+            HStack {
+                Image(systemName: "staroflife.fill")
+                    .foregroundColor(.red)
+                Text("= Required")
+                    .foregroundColor(.red)
             }
             Spacer()
             Form {
@@ -298,7 +312,7 @@ struct AddView: View {
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Save")
-            }))
+            })).disabled(name.isEmpty || locationString.isEmpty == true)
         }
     }
     func addBucKitItem(latitude: Double, longitude: Double) {
