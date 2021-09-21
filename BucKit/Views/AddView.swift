@@ -172,6 +172,8 @@ struct AddViewWithNavigationBar: View {
     func deleteActivity(activity: Activity) {
         if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
             savedActivities.remove(at: index)
+            let activity = savedActivities[index]
+            activityService.deleteActivity(activity: activity)
         }
     }
 }
