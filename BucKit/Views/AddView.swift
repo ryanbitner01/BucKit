@@ -16,7 +16,6 @@ struct AddViewWithNavigationBar: View {
     private let bucketItemService = BucKitItemService()
     private let activityService = ActivityService()
     private let locationService = LocationService()
-    let buckitItem: BucKitItem?
     
     @State private var deletePressed = false
     @State var name = ""
@@ -30,6 +29,8 @@ struct AddViewWithNavigationBar: View {
     @State private var showAlert: Bool = false
     @State private var sourceType: Int = 0
     @State private var image: Data?
+    var buckitItem: BucKitItem? = nil
+    
     
     var body: some View {
         NavigationView {
@@ -153,7 +154,11 @@ struct AddViewWithNavigationBar: View {
     }
     
     func addBucKitItem(latitude: Double, longitude: Double) {
-        bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: image, id: UUID(), activities: savedActivities, location: locationString)
+        if let item = buckitItem {
+            bucketItemService.updateItem(item, name: name, latitude: latitude, longitude: longitude, date: date, image: image, activities: savedActivities, location: locationString)
+        } else {
+            bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: image, activities: savedActivities, location: locationString)
+        }
     }
     
     func addActivity() {
@@ -167,8 +172,7 @@ struct AddViewWithNavigationBar: View {
     
     func deleteActivity(activity: Activity) {
         if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
-            savedActivities.remove(at: index)
-            let activity = savedActivities[index]
+            let activity = savedActivities.remove(at: index)
             activityService.deleteActivity(activity: activity)
         }
     }
@@ -179,8 +183,7 @@ struct AddView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var viewContext
     
-    @FetchRequest(entity: BucKitItem.entity(), sortDescriptors: [])
-    var items: FetchedResults<BucKitItem>
+    let item: BucKitItem? = nil
     
     private let bucketItemService = BucKitItemService()
     private let activityService = ActivityService()
@@ -299,24 +302,27 @@ struct AddView: View {
         }
     }
     func addBucKitItem(latitude: Double, longitude: Double) {
-        bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: image, id: UUID(), activities: savedActivities, location: locationString)
-    }
-        
-        func addActivity() {
-            
-            let newActivity = activityService.addActivity(name: newActivityName)
-            
-            savedActivities.append(newActivity)
-            newActivityName = ""
-            
+        if let item = item {
+            bucketItemService.updateItem(item, name: name, latitude: latitude, longitude: longitude, date: date, image: image, activities: savedActivities, location: locationString)
         }
+        bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: image, activities: savedActivities, location: locationString)
+    }
+    
+    func addActivity() {
         
-        func deleteActivity(activity: Activity) {
-            if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
-                savedActivities.remove(at: index)
-            }
+        let newActivity = activityService.addActivity(name: newActivityName)
+        
+        savedActivities.append(newActivity)
+        newActivityName = ""
+        
+    }
+    
+    func deleteActivity(activity: Activity) {
+        if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
+            savedActivities.remove(at: index)
         }
     }
+}
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {

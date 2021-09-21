@@ -27,7 +27,6 @@
 		3C54865D26D7F26D00CBF23D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C54865926D7F26D00CBF23D /* Assets.xcassets */; };
 		3C69BF9F26E8F6A700E5DF62 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69BF9E26E8F6A700E5DF62 /* ImagePickerView.swift */; };
 		3C69BFB926EBCCF800E5DF62 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69BFB826EBCCF800E5DF62 /* LocationService.swift */; };
-		3C69BFBB26EBCD5D00E5DF62 /* BucKitItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69BFBA26EBCD5D00E5DF62 /* BucKitItem+CoreDataProperties.swift */; };
 		3C887A4926D9354B00D68906 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C887A4726D9354B00D68906 /* AddView.swift */; };
 		3C887A8B26DB433500D68906 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C887A8A26DB433500D68906 /* ActivityController.swift */; };
 		3C9B869326DBFB19009FA683 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B869226DBFB19009FA683 /* MapView.swift */; };
@@ -109,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				1E22949F26E7A4AC0036DF4C /* Core Data */,
-				1E22949E26E7A4970036DF4C /* Services */,
 				3C9B869426DBFC99009FA683 /* MapViewModel.swift */,
 				3C9B869626DC1B81009FA683 /* Place.swift */,
 			);
@@ -146,6 +144,7 @@
 			children = (
 				3C54866326D7F5F400CBF23D /* Info.plist */,
 				1EA3998A26D92E91002B52A5 /* model */,
+				1E22949E26E7A4970036DF4C /* Services */,
 				3C54865226D7F09900CBF23D /* App */,
 				3C54865426D7F26D00CBF23D /* CoreData */,
 				3C54865826D7F26D00CBF23D /* Misc */,
@@ -287,7 +286,6 @@
 				3C9B869726DC1B81009FA683 /* Place.swift in Sources */,
 				1EB47C5426F241350011ECF6 /* HotelResult.swift in Sources */,
 				3C54862C26D7EE1B00CBF23D /* WorldView.swift in Sources */,
-				3C69BFBB26EBCD5D00E5DF62 /* BucKitItem+CoreDataProperties.swift in Sources */,
 				1EB47C9F26F4E6EF0011ECF6 /* HotelList.swift in Sources */,
 				1EBCC37826EFAC4E00E9BED8 /* TravelPlanner.swift in Sources */,
 				1EBCC33626EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift in Sources */,
