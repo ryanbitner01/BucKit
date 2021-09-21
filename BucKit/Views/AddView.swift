@@ -40,10 +40,10 @@ struct AddViewWithNavigationBar: View {
                     Button("Change Image", action: {
                         self.isShowingPhotoPicker.toggle()
                     })
-                    .padding()
-                    .sheet(isPresented: $isShowingPhotoPicker, content: {
-                        ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
-                    })
+                        .padding()
+                        .sheet(isPresented: $isShowingPhotoPicker, content: {
+                            ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
+                        })
                 }
                 
                 HStack {
@@ -122,7 +122,7 @@ struct AddViewWithNavigationBar: View {
                 }), trailing: Button(action: {
                     locationService.tryToSave(location: locationString) { result in
                         switch result {
-                        
+                            
                         case .success(let location):
                             addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                         case .failure(_):
@@ -205,14 +205,16 @@ struct AddView: View {
                 Button("Change Image", action: {
                     self.isShowingPhotoPicker.toggle()
                 })
-                .padding()
-                .sheet(isPresented: $isShowingPhotoPicker, content: {
-                    ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
-                })
+                    .padding()
+                    .sheet(isPresented: $isShowingPhotoPicker, content: {
+                        ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
+                    })
             }
             
             HStack {
                 Spacer(minLength: 15)
+                Image(systemName: "staroflife.fill")
+                    .foregroundColor(.red)
                 Text("Name:")
                     .font(.system(size: 19))
                 Spacer(minLength: 45)
@@ -229,6 +231,8 @@ struct AddView: View {
             .padding()
             HStack {
                 Spacer(minLength: 10)
+                Image(systemName: "staroflife.fill")
+                    .foregroundColor(.red)
                 Text("Location:")
                     .font(.system(size: 20))
                 Spacer(minLength: 25)
@@ -249,6 +253,13 @@ struct AddView: View {
                 Spacer(minLength: 105)
                 DatePicker("", selection: $date, displayedComponents: .date)
                     .padding()
+                
+            }
+            HStack {
+                Image(systemName: "staroflife.fill")
+                    .foregroundColor(.red)
+                Text("= Required")
+                    .foregroundColor(.red)
             }
             Spacer()
             Form {
@@ -281,9 +292,10 @@ struct AddView: View {
             .navigationTitle("Add View")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button(action: {
+                
                 locationService.tryToSave(location: locationString) { result in
                     switch result {
-                    
+                        
                     case .success(let location):
                         addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                     case .failure(_):
@@ -293,28 +305,30 @@ struct AddView: View {
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Save")
-            }))
+            })
+                                    .disabled(name.isEmpty || locationString.isEmpty == true)
+            )
         }
     }
     func addBucKitItem(latitude: Double, longitude: Double) {
         bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: image, id: UUID(), activities: savedActivities, location: locationString)
     }
+    
+    func addActivity() {
         
-        func addActivity() {
-            
-            let newActivity = activityService.addActivity(name: newActivityName)
-            
-            savedActivities.append(newActivity)
-            newActivityName = ""
-            
-        }
+        let newActivity = activityService.addActivity(name: newActivityName)
         
-        func deleteActivity(activity: Activity) {
-            if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
-                savedActivities.remove(at: index)
-            }
+        savedActivities.append(newActivity)
+        newActivityName = ""
+        
+    }
+    
+    func deleteActivity(activity: Activity) {
+        if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
+            savedActivities.remove(at: index)
         }
     }
+}
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {

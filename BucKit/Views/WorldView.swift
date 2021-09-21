@@ -140,12 +140,13 @@ struct WorldView: View {
                                     destination: ListView(),
                                     label: {
                                         Image(systemName: "list.bullet")
+                                            .foregroundColor(.black)
                                     }), trailing: NavigationLink(
                                         destination: AddView(),
                                         label: {
                                             Image(systemName: "plus")
+                                                .foregroundColor(.black)
                                         }))
-            
         }
         .alert(isPresented: $isShowingDetailAlert, content: {
             Alert(title: Text(selectedItem?.title ?? "Unknown"), message: Text(selectedItem?.subtitle ?? "Missing place information."), primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Show Detail")) {
