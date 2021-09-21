@@ -42,6 +42,7 @@ struct TravelPlanner: View {
             item.loadPlaceMark()
         })
         .navigationBarTitle("Travel Planner")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     func getHotels() {
