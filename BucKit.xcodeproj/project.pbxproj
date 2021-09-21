@@ -27,7 +27,6 @@
 		3C54865D26D7F26D00CBF23D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C54865926D7F26D00CBF23D /* Assets.xcassets */; };
 		3C69BF9F26E8F6A700E5DF62 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69BF9E26E8F6A700E5DF62 /* ImagePickerView.swift */; };
 		3C69BFB926EBCCF800E5DF62 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69BFB826EBCCF800E5DF62 /* LocationService.swift */; };
-		3C69BFBB26EBCD5D00E5DF62 /* BucKitItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69BFBA26EBCD5D00E5DF62 /* BucKitItem+CoreDataProperties.swift */; };
 		3C887A4926D9354B00D68906 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C887A4726D9354B00D68906 /* AddView.swift */; };
 		3C887A8B26DB433500D68906 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C887A8A26DB433500D68906 /* ActivityController.swift */; };
 		3C9B869326DBFB19009FA683 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B869226DBFB19009FA683 /* MapView.swift */; };
@@ -287,7 +286,6 @@
 				3C9B869726DC1B81009FA683 /* Place.swift in Sources */,
 				1EB47C5426F241350011ECF6 /* HotelResult.swift in Sources */,
 				3C54862C26D7EE1B00CBF23D /* WorldView.swift in Sources */,
-				3C69BFBB26EBCD5D00E5DF62 /* BucKitItem+CoreDataProperties.swift in Sources */,
 				1EB47C9F26F4E6EF0011ECF6 /* HotelList.swift in Sources */,
 				1EBCC37826EFAC4E00E9BED8 /* TravelPlanner.swift in Sources */,
 				1EBCC33626EBB0D900E9BED8 /* BucKitItem+CoreDataProperties.swift in Sources */,

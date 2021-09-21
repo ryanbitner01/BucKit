@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 
 @objc(BucKitItem)
 public class BucKitItem: NSManagedObject {
