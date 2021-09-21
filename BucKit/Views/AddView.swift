@@ -40,10 +40,10 @@ struct AddViewWithNavigationBar: View {
                     Button("Change Image", action: {
                         self.isShowingPhotoPicker.toggle()
                     })
-                        .padding()
-                        .sheet(isPresented: $isShowingPhotoPicker, content: {
-                            ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
-                        })
+                    .padding()
+                    .sheet(isPresented: $isShowingPhotoPicker, content: {
+                        ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
+                    })
                 }
                 
                 HStack {
@@ -122,7 +122,7 @@ struct AddViewWithNavigationBar: View {
                 }), trailing: Button(action: {
                     locationService.tryToSave(location: locationString) { result in
                         switch result {
-                            
+                        
                         case .success(let location):
                             addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                         case .failure(_):
@@ -313,22 +313,22 @@ struct AddView: View {
     func addBucKitItem(latitude: Double, longitude: Double) {
         bucketItemService.addItem(name: name, latitude: latitude, longitude: longitude, date: date, image: image, id: UUID(), activities: savedActivities, location: locationString)
     }
-    
-    func addActivity() {
         
-        let newActivity = activityService.addActivity(name: newActivityName)
+        func addActivity() {
+            
+            let newActivity = activityService.addActivity(name: newActivityName)
+            
+            savedActivities.append(newActivity)
+            newActivityName = ""
+            
+        }
         
-        savedActivities.append(newActivity)
-        newActivityName = ""
-        
-    }
-    
-    func deleteActivity(activity: Activity) {
-        if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
-            savedActivities.remove(at: index)
+        func deleteActivity(activity: Activity) {
+            if let index = savedActivities.lastIndex(where: { $0.id == activity.id })  {
+                savedActivities.remove(at: index)
+            }
         }
     }
-}
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
