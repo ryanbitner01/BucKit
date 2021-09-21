@@ -19,5 +19,9 @@ struct BucKitApp: App {
                 .environment(\.managedObjectContext, persistenceController.viewContext)
         }
     }
+    init() {
+        let appearance = UINavigationBarAppearance()
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
 }
 
