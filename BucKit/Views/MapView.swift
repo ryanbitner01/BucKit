@@ -29,6 +29,7 @@ struct MapView:  UIViewRepresentable {
         
         view.showsUserLocation = true
         view.delegate = context.coordinator
+        getAnnotations()
         return view
         
     }

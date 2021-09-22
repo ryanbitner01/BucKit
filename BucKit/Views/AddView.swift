@@ -29,121 +29,132 @@ struct AddViewWithNavigationBar: View {
     @State private var showAlert: Bool = false
     @State private var sourceType: Int = 0
     @State private var image: Data?
+    
     var buckitItem: BucKitItem? = nil
     
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .center) {
-                VStack {
-                    Spacer()
-                    CircleImage(width: 250, imageData: image != nil ? image: nil )
-                    Button("Change Image", action: {
-                        self.isShowingPhotoPicker.toggle()
-                    })
-                    .padding()
-                    .sheet(isPresented: $isShowingPhotoPicker, content: {
-                        ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
-                    })
-                }
-                
-                HStack {
-                    Spacer(minLength: 15)
-                    Text("Name:")
-                        .font(.system(size: 19))
-                    Spacer(minLength: 45)
-                    TextField("Enter goal name", text: $name)
-                }
-                .contentShape(Rectangle())
-                .multilineTextAlignment(.center)
-                .frame(height: 10)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 14)
-                        .stroke(Color.blue, lineWidth: 2))
-                
-                .padding()
-                HStack {
-                    Spacer(minLength: 10)
-                    Text("Location:")
-                        .font(.system(size: 20))
-                    Spacer(minLength: 25)
-                    TextField("Enter location name", text: $locationString)
-                }
-                .contentShape(Rectangle())
-                .frame(height: 10)
-                .multilineTextAlignment(.center)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 14)
-                        .stroke(Color.blue, lineWidth: 2))
-                .padding()
-                HStack {
-                    Spacer(minLength: 10)
-                    Text("Goal Date:")
-                        .font(.system(size: 20))
-                    Spacer(minLength: 105)
-                    DatePicker("", selection: $date, displayedComponents: .date)
-                        .padding()
-                }
-                HStack {
-                    Image(systemName: "staroflife.fill")
-                    Text(" = Required")
-                }
-                Spacer()
-                Form {
+        if #available(iOS 15.0, *) {
+            NavigationView {
+                VStack(alignment: .center) {
+                    VStack {
+                        Spacer()
+                        CircleImage(width: 250, imageData: image != nil ? image: nil )
+                        Button("Change Image", action: {
+                            self.isShowingPhotoPicker.toggle()
+                        })
+                            .padding()
+                            .sheet(isPresented: $isShowingPhotoPicker, content: {
+                                ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
+                            })
+                    }
+                    
                     HStack {
-                        Text("Activity:")
-                        TextField("Type Activity Here", text: $newActivityName)
-                        Image(systemName: "plus")
-                            .onTapGesture {
-                                addActivity()
-                            }
-                            .foregroundColor(.blue)
+                        Spacer(minLength: 15)
+                        Text("Name:")
+                            .font(.system(size: 19))
+                        Spacer(minLength: 45)
+                        TextField("Enter goal name", text: $name)
                     }
-                    List {
-                        ForEach(savedActivities) { activity in
-                            HStack {
-                                Image(systemName: "circle.fill")
-                                    .foregroundColor(.black)
-                                Text(activity.name)
-                                Spacer()
-                                Button(action: {
-                                    deleteActivity(activity: activity)
-                                }, label: {
-                                    Image(systemName: "trash")
-                                })
+                    .contentShape(Rectangle())
+                    .multilineTextAlignment(.center)
+                    .frame(height: 10)
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(Color.blue, lineWidth: 2))
+                    
+                    .padding()
+                    HStack {
+                        Spacer(minLength: 10)
+                        Text("Location:")
+                            .font(.system(size: 20))
+                        Spacer(minLength: 25)
+                        TextField("Enter location name", text: $locationString)
+                    }
+                    .contentShape(Rectangle())
+                    .frame(height: 10)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(Color.blue, lineWidth: 2))
+                    .padding()
+                    HStack {
+                        Spacer(minLength: 10)
+                        Text("Goal Date:")
+                            .font(.system(size: 20))
+                        Spacer(minLength: 105)
+                        DatePicker("", selection: $date, displayedComponents: .date)
+                            .padding()
+                    }
+                    HStack {
+                        Image(systemName: "staroflife.fill")
+                        Text(" = Required")
+                    }
+                    Spacer()
+                    Form {
+                        HStack {
+                            Text("Activity:")
+                            TextField("Type Activity Here", text: $newActivityName)
+                            Image(systemName: "plus")
+                                .onTapGesture {
+                                    addActivity()
+                                }
+                                .foregroundColor(.blue)
+                        }
+                        List {
+                            ForEach(savedActivities) { activity in
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                        .foregroundColor(.black)
+                                    Text(activity.name)
+                                    Spacer()
+                                    Button(action: {
+                                        deleteActivity(activity: activity)
+                                    }, label: {
+                                        Image(systemName: "trash")
+                                    })
+                                }
                             }
                         }
                     }
+                    
+                    .navigationTitle("Add View")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarItems(leading: Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Cancel")
+                    }), trailing: Button(action: {
+                        locationService.tryToSave(location: locationString) { result in
+                            switch result {
+                                
+                            case .success(let location):
+                                addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                            case .failure(_):
+                                showAlert.toggle()
+                            }
+                        }
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Save")
+                    })).disabled(name.isEmpty || locationString.isEmpty == true)
+                    
                 }
-                
-                .navigationTitle("Add View")
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(leading: Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Text("Cancel")
-                }), trailing: Button(action: {
-                    locationService.tryToSave(location: locationString) { result in
-                        switch result {
-                        
-                        case .success(let location):
-                            addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                        case .failure(_):
-                            print("Failed to save")
-                        }
-                    }
-                    presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Text("Save")
-                })).disabled(name.isEmpty || locationString.isEmpty == true)
-                
             }
+            .alert("Invalid Location", isPresented: $showAlert, actions: {}, message: {Text("Please check spelling and try again.")})
+            //        .alert(
+            //                    "Unable to locate", isPresented: $showAlert, presenting: nil
+            //                ) { message: { detail in
+            //                    Text("Location is invalid, check spelling.")
+            //                }
+            .onAppear(perform: {
+                updateUI()
+            })
+        } else {
+            // Fallback on earlier versions
         }
-        .onAppear(perform: {
-            updateUI()
-        })
     }
     func updateUI() {
         if let buckitItem = buckitItem {
@@ -207,112 +218,117 @@ struct AddView: View {
     @State private var image: Data?
     
     var body: some View {
-        VStack(alignment: .center) {
-            VStack {
-                Spacer()
-                CircleImage(width: 250, imageData: image != nil ? image: nil )
-                Button("Change Image", action: {
-                    self.isShowingPhotoPicker.toggle()
-                })
-                .padding()
-                .sheet(isPresented: $isShowingPhotoPicker, content: {
-                    ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
-                })
-            }
-            
-            HStack {
-                Spacer(minLength: 15)
-                Image(systemName: "staroflife.fill")
-                    .foregroundColor(.red)
-                Text("Name:")
-                    .font(.system(size: 19))
-                Spacer(minLength: 45)
-                TextField("Enter goal name", text: $name)
-            }
-            .contentShape(Rectangle())
-            .multilineTextAlignment(.center)
-            .frame(height: 10)
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(Color.blue, lineWidth: 2))
-            
-            .padding()
-            HStack {
-                Spacer(minLength: 10)
-                Image(systemName: "staroflife.fill")
-                    .foregroundColor(.red)
-                Text("Location:")
-                    .font(.system(size: 20))
-                Spacer(minLength: 25)
-                TextField("Enter location name", text: $locationString)
-            }
-            .contentShape(Rectangle())
-            .frame(height: 10)
-            .multilineTextAlignment(.center)
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(Color.blue, lineWidth: 2))
-            .padding()
-            HStack {
-                Spacer(minLength: 10)
-                Text("Goal Date:")
-                    .font(.system(size: 20))
-                Spacer(minLength: 105)
-                DatePicker("", selection: $date, displayedComponents: .date)
-                    .padding()
-            }
-            HStack {
-                Image(systemName: "staroflife.fill")
-                    .foregroundColor(.red)
-                Text("= Required")
-                    .foregroundColor(.red)
-            }
-            Spacer()
-            Form {
+        if #available(iOS 15.0, *) {
+            VStack(alignment: .center) {
+                VStack {
+                    Spacer()
+                    CircleImage(width: 250, imageData: image != nil ? image: nil )
+                    Button("Change Image", action: {
+                        self.isShowingPhotoPicker.toggle()
+                    })
+                        .padding()
+                        .sheet(isPresented: $isShowingPhotoPicker, content: {
+                            ImagePicker(show: $isShowingPhotoPicker, image: self.$image)
+                        })
+                }
+                
                 HStack {
-                    Text("Activity:")
-                    TextField("Type Activity Here", text: $newActivityName)
-                    Image(systemName: "plus")
-                        .onTapGesture {
-                            addActivity()
-                        }
-                        .foregroundColor(.blue)
+                    Spacer(minLength: 15)
+                    Image(systemName: "staroflife.fill")
+                        .foregroundColor(.red)
+                    Text("Name:")
+                        .font(.system(size: 19))
+                    Spacer(minLength: 45)
+                    TextField("Enter goal name", text: $name)
                 }
-                List {
-                    ForEach(savedActivities) { activity in
-                        HStack {
-                            Image(systemName: "circle.fill")
-                                .foregroundColor(.black)
-                            Text(activity.name)
-                            Spacer()
-                            Button(action: {
-                                deleteActivity(activity: activity)
-                            }, label: {
-                                Image(systemName: "trash")
-                            })
+                .contentShape(Rectangle())
+                .multilineTextAlignment(.center)
+                .frame(height: 10)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14)
+                        .stroke(Color.blue, lineWidth: 2))
+                
+                .padding()
+                HStack {
+                    Spacer(minLength: 10)
+                    Image(systemName: "staroflife.fill")
+                        .foregroundColor(.red)
+                    Text("Location:")
+                        .font(.system(size: 20))
+                    Spacer(minLength: 25)
+                    TextField("Enter location name", text: $locationString)
+                }
+                .contentShape(Rectangle())
+                .frame(height: 10)
+                .multilineTextAlignment(.center)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14)
+                        .stroke(Color.blue, lineWidth: 2))
+                .padding()
+                HStack {
+                    Spacer(minLength: 10)
+                    Text("Goal Date:")
+                        .font(.system(size: 20))
+                    Spacer(minLength: 105)
+                    DatePicker("", selection: $date, displayedComponents: .date)
+                        .padding()
+                }
+                HStack {
+                    Image(systemName: "staroflife.fill")
+                        .foregroundColor(.red)
+                    Text("= Required")
+                        .foregroundColor(.red)
+                }
+                Spacer()
+                Form {
+                    HStack {
+                        Text("Activity:")
+                        TextField("Type Activity Here", text: $newActivityName)
+                        Image(systemName: "plus")
+                            .onTapGesture {
+                                addActivity()
+                            }
+                            .foregroundColor(.blue)
+                    }
+                    List {
+                        ForEach(savedActivities) { activity in
+                            HStack {
+                                Image(systemName: "circle.fill")
+                                    .foregroundColor(.black)
+                                Text(activity.name)
+                                Spacer()
+                                Button(action: {
+                                    deleteActivity(activity: activity)
+                                }, label: {
+                                    Image(systemName: "trash")
+                                })
+                            }
                         }
                     }
                 }
+                
+                .navigationTitle("Add View")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(trailing: Button(action: {
+                    locationService.tryToSave(location: locationString) { result in
+                        switch result {
+                            
+                        case .success(let location):
+                            addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                            presentationMode.wrappedValue.dismiss()
+                        case .failure(_):
+                            showAlert.toggle()
+                        }
+                    }
+                }, label: {
+                    Text("Save")
+                })).disabled(name.isEmpty || locationString.isEmpty == true)
             }
-            
-            .navigationTitle("Add View")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: Button(action: {
-                locationService.tryToSave(location: locationString) { result in
-                    switch result {
-                    
-                    case .success(let location):
-                        addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                    case .failure(_):
-                        print("Failed to save")
-                    }
-                }
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("Save")
-            })).disabled(name.isEmpty || locationString.isEmpty == true)
+            .alert("Invalid Location", isPresented: $showAlert, actions: {}, message: {Text("Please check spelling and try again.")})
+        } else {
+            // Fallback on earlier versions
         }
     }
     func addBucKitItem(latitude: Double, longitude: Double) {
