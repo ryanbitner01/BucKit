@@ -74,7 +74,13 @@ struct MapView:  UIViewRepresentable {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
                 annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+                guard let item = BucKitItemService().getBucKitItem(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, items: parent.items)
+                else { return nil }
+                if let data = item.image {
+                    annotationView?.image = UIImage(data: data)? .resizedRoundedImage()
+                } else {
                 annotationView?.image = UIImage(named: "testImage")?.resizedRoundedImage()
+                }
             } else {
                 annotationView?.annotation = annotation
             }

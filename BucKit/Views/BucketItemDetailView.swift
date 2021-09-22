@@ -78,6 +78,7 @@ struct BucketItemDetailView: View {
     
     @ObservedObject var item: BucKitItem
     @State var AddViewWithNavBarIsShown = false
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
             GeometryReader { geometry in
