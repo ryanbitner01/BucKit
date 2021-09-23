@@ -39,7 +39,7 @@ struct TravelPlanner: View {
             }
         }
         .onAppear(perform: {
-            item.loadPlaceMark()
+//            item.loadPlaceMark()
         })
         .navigationBarTitle("Travel Planner")
         .navigationBarTitleDisplayMode(.inline)
