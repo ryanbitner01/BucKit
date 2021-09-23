@@ -8,19 +8,23 @@
 import SwiftUI
 import CoreData
 
-struct RegularListView: View {
+struct ListView: View {
     
     @Environment(\.editMode) var mode
     
+    @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
+    var results: FetchedResults<BucKitItem>
+    
+    @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
     @State private var inactive: EditMode = EditMode.inactive
     
-    let bucKitItemService = BucKitItemService()
-    var items: [BucKitItem]
-
+    var items: [BucKitItem] {
+        Array(results)
+    }
+    
     var body: some View {
         List {
-            if items.count > 0 {
-            ForEach(items, id: \.id) { result in
+            ForEach(items) { result in
                 NavigationLink(
                     destination: BucketItemDetailView(item: result),
                     label: {
@@ -36,63 +40,42 @@ struct RegularListView: View {
                             }
                         }
                     })
-                }
+            }
             .onDelete(perform: onDelete)
             .deleteDisabled(!self.inactive.isEditing)
-            }
             
         }
         .navigationTitle("List View")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing:
                                 HStack {
-                                    EditButton()
-                                    Spacer(minLength: 25)
-                                    NavigationLink(
-                                        destination: AddView(),
-                                        label: {
-                                            Image(systemName: "plus")
-                                        })
-                                })
+            EditButton()
+            Spacer(minLength: 25)
+            NavigationLink(
+                destination: AddView(),
+                label: {
+                    Image(systemName: "plus")
+                })
+        })
         .environment(\.editMode, $inactive)
+        
+        .overlay(
+            Group {
+                if items.isEmpty {
+                    Text( "Please Press the + to add an Item")
+                }
+            }
+        )
     }
     
     func onDelete(offsets: IndexSet) {
-        guard let firstIndex = offsets.first else {return}
+        guard let firstIndex = offsets.first else { return }
         let item = items[firstIndex]
         // Delete from core data
-        bucKitItemService.removeItem(bucKitItem: item)
-        
-    }
-}
-
-struct ListView: View {
-    
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.editMode) var mode
-    
-    @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
-    var results: FetchedResults<BucKitItem>
-    
-    @ObservedObject var bucketItemService: BucKitItemService = BucKitItemService()
-    @ObservedObject var activityService: ActivityService = ActivityService()
-    
-    @State var detailView: Bool = false
-    @State var presentDetail: Bool = false
-    @State private var inactive: EditMode = EditMode.inactive
-    
-    var body: some View {
-        let itemsArray = Array(results)
-        RegularListView(items: itemsArray)
-            .overlay(
-                Text(itemsArray.isEmpty ? "Please Press the + to add an Item": "")
-            )
-
+        bucketItemService.removeItem(bucKitItem: item)
     }
     
-    
 }
-
 
 
 struct ListView_Previews: PreviewProvider {
