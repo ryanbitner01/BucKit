@@ -9,18 +9,28 @@ import SwiftUI
 import MapKit
 import CoreData
 
-struct MapView:  UIViewRepresentable {
+final class MapView:  UIViewRepresentable {
 
-    @EnvironmentObject var mapData: MapViewModel
+    var mapData = MapViewModel()
+    
+    
     
     @Binding var isShowingDetail: Bool
     @Binding var selectedItem: MKPointAnnotation?
     
-    let map = MKMapView()
     var items: [BucKitItem]
     
+<<<<<<< Updated upstream
     @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
     var results: FetchedResults<BucKitItem>
+=======
+    init(isShowingDetail: Binding<Bool>, selectedItem: Binding<MKPointAnnotation?>, items: [BucKitItem]) {
+        self._isShowingDetail = isShowingDetail
+        self._selectedItem = selectedItem
+        self.items = items
+        
+    }
+>>>>>>> Stashed changes
     
     func makeCoordinator() -> Coordinator {
         
@@ -28,7 +38,7 @@ struct MapView:  UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> MKMapView {
-        
+
         let view = mapData.mapView
         
         view.showsUserLocation = true
