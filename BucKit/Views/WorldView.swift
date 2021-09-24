@@ -25,15 +25,14 @@ struct WorldView: View {
     @State var isShowingDetail = false
     @State var isShowingDetailAlert = false
     @State var selectedItem: MKPointAnnotation? = nil
-    var items: [BucKitItem] {
-        return results.map({$0})
-    }
+    
     var body: some View {
         NavigationView {
             ZStack {
-                MapView(isShowingDetail: $isShowingDetailAlert, selectedItem: $selectedItem, items: items)
+                MapView(isShowingDetail: $isShowingDetailAlert, selectedItem: $selectedItem, items: results.map({$0}))
                     .environmentObject(mapData)
                     .ignoresSafeArea(.all, edges: .all)
+                
                 
                 VStack {
                     
@@ -159,7 +158,7 @@ struct WorldView: View {
     
     func getBucKitItem() -> BucKitItem? {
         guard let lat = selectedItem?.coordinate.latitude, let long = selectedItem?.coordinate.longitude else {return nil}
-        return bucKitItemService.getBucKitItem(lat: lat, long: long, items: items)
+        return bucKitItemService.getBucKitItem(lat: lat, long: long, items: results.map({$0}))
     }
 }
 

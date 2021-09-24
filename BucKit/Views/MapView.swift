@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import CoreData
 
 struct MapView:  UIViewRepresentable {
 
@@ -17,6 +18,9 @@ struct MapView:  UIViewRepresentable {
     
     let map = MKMapView()
     var items: [BucKitItem]
+    
+    @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
+    var results: FetchedResults<BucKitItem>
     
     func makeCoordinator() -> Coordinator {
         
@@ -75,15 +79,26 @@ struct MapView:  UIViewRepresentable {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
                 annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-                guard let item = BucKitItemService().getBucKitItem(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, items: parent.items)
+                guard let item = BucKitItemService().getBucKitItem(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, items: parent.results.map{$0})
                 else { return nil }
                 if let data = item.image {
                     annotationView?.image = UIImage(data: data)? .resizedRoundedImage()
                 } else {
                 annotationView?.image = UIImage(named: "testImage")?.resizedRoundedImage()
+                    
                 }
             } else {
                 annotationView?.annotation = annotation
+                annotationView?.canShowCallout = true
+                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+                guard let item = BucKitItemService().getBucKitItem(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, items: parent.items.map{$0})
+                else { return nil }
+                if let data = item.image {
+                    annotationView?.image = UIImage(data: data)? .resizedRoundedImage()
+                } else {
+                annotationView?.image = UIImage(named: "testImage")?.resizedRoundedImage()
+                    
+                }
             }
             return annotationView
         }
