@@ -20,17 +20,12 @@ final class MapView:  UIViewRepresentable {
     
     var items: [BucKitItem]
     
-<<<<<<< Updated upstream
-    @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
-    var results: FetchedResults<BucKitItem>
-=======
     init(isShowingDetail: Binding<Bool>, selectedItem: Binding<MKPointAnnotation?>, items: [BucKitItem]) {
         self._isShowingDetail = isShowingDetail
         self._selectedItem = selectedItem
         self.items = items
         
     }
->>>>>>> Stashed changes
     
     func makeCoordinator() -> Coordinator {
         
@@ -89,7 +84,7 @@ final class MapView:  UIViewRepresentable {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
                 annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-                guard let item = BucKitItemService().getBucKitItem(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, items: parent.results.map{$0})
+                guard let item = BucKitItemService().getBucKitItem(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, items: parent.items)
                 else { return nil }
                 if let data = item.image {
                     annotationView?.image = UIImage(data: data)? .resizedRoundedImage()
