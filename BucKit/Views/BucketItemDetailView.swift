@@ -19,7 +19,13 @@ struct BuckitItemViewWithNavBar: View {
             BucketItemDetailView(item: item)
                 .navigationTitle("Detail")
                 .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(leading: Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Back")
+                }))
         }
+        
     }
     
     func arrayOfActivities() -> [Activity] {
@@ -78,9 +84,6 @@ struct BucketItemDetailView: View {
             }.sheet(isPresented: $AddViewWithNavBarIsShown) {
                 AddViewWithNavigationBar(buckitItem: item)
             })
-            .onAppear {
-                item.loadPlaceMark()
-            }
         }
     }
     

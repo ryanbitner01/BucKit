@@ -12,13 +12,14 @@ import CoreLocation
 
 @objc(BucKitItem)
 public class BucKitItem: NSManagedObject {
-    func loadPlaceMark() {
+    func loadPlaceMark(completion: @escaping (Result<String, Error>) -> Void) {
         let location = CLLocation(latitude: latitude, longitude: longitude)
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             // 1
             if let error = error {
                 print(error)
+                completion(.failure(error))
             }
             // 2
             guard let placemark = placemarks?.first else { return }
@@ -31,11 +32,8 @@ public class BucKitItem: NSManagedObject {
             guard let zipCode = placemark.postalCode else { return }
             // 4
             let address = "\(streetNumber) \(streetName) \(city), \(state), \(zipCode)"
-            self.address = address
+            completion(.success(address))
             
-            CoreDataStack.shared.saveContext()
-            
-            ActivityController.shared.saveAndReload()
         }
     }
     
