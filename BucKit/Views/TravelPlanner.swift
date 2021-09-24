@@ -13,6 +13,7 @@ struct TravelPlanner: View {
     @State var item: BucKitItem
     var hotelNetworkService = HotelNetworkService()
     @State var numOfAdults = 1
+    @State var address: String = ""
     @State private var checkinDate = Date()
     @State private var checkoutDate = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
     let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
@@ -38,9 +39,7 @@ struct TravelPlanner: View {
                 HotelList(hotels: hotels)
             }
         }
-        .onAppear(perform: {
-//            item.loadPlaceMark()
-        })
+        .onAppear(perform: getAddress)
         .navigationBarTitle("Travel Planner")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -55,6 +54,17 @@ struct TravelPlanner: View {
                 }
             case .failure(let err):
                 print(err)
+            }
+        }
+    }
+    
+    func getAddress() {
+        item.loadPlaceMark { result in
+            switch result {
+            case .success(let address):
+                self.address = address
+            case .failure(_):
+                self.address = "No Address"
             }
         }
     }
