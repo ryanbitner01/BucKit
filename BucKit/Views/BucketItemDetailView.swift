@@ -37,7 +37,7 @@ struct BuckitItemViewWithNavBar: View {
 
 struct BucketItemDetailView: View {
     
-    var item: BucKitItem
+    @ObservedObject var item: BucKitItem
     @State var AddViewWithNavBarIsShown = false
     
     var body: some View {

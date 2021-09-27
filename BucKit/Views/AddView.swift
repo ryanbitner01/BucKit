@@ -132,6 +132,7 @@ struct AddViewWithNavigationBar: View {
                                 
                             case .success(let location):
                                 addBucKitItem(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                                presentationMode.wrappedValue.dismiss()
                             case .failure(_):
                                 showAlert.toggle()
                             }
@@ -162,6 +163,7 @@ struct AddViewWithNavigationBar: View {
             locationString = buckitItem.location
             date = buckitItem.date
             savedActivities = arrayOfActivities()
+            self.image = buckitItem.image
         }
     }
     func arrayOfActivities() -> [Activity] {

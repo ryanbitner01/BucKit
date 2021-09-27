@@ -7,16 +7,25 @@
 
 import SwiftUI
 import MapKit
+import CoreData
 
-struct MapView:  UIViewRepresentable {
+final class MapView:  UIViewRepresentable {
 
-    @EnvironmentObject var mapData: MapViewModel
+    var mapData = MapViewModel()
+    
+    
     
     @Binding var isShowingDetail: Bool
     @Binding var selectedItem: MKPointAnnotation?
     
-    let map = MKMapView()
     var items: [BucKitItem]
+    
+    init(isShowingDetail: Binding<Bool>, selectedItem: Binding<MKPointAnnotation?>, items: [BucKitItem]) {
+        self._isShowingDetail = isShowingDetail
+        self._selectedItem = selectedItem
+        self.items = items
+        
+    }
     
     func makeCoordinator() -> Coordinator {
         
@@ -24,7 +33,7 @@ struct MapView:  UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> MKMapView {
-        
+
         let view = mapData.mapView
         
         view.showsUserLocation = true
@@ -81,9 +90,20 @@ struct MapView:  UIViewRepresentable {
                     annotationView?.image = UIImage(data: data)? .resizedRoundedImage()
                 } else {
                 annotationView?.image = UIImage(named: "testImage")?.resizedRoundedImage()
+                    
                 }
             } else {
                 annotationView?.annotation = annotation
+                annotationView?.canShowCallout = true
+                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+                guard let item = BucKitItemService().getBucKitItem(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, items: parent.items.map{$0})
+                else { return nil }
+                if let data = item.image {
+                    annotationView?.image = UIImage(data: data)? .resizedRoundedImage()
+                } else {
+                annotationView?.image = UIImage(named: "testImage")?.resizedRoundedImage()
+                    
+                }
             }
             return annotationView
         }

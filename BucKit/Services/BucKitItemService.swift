@@ -10,7 +10,6 @@ import CoreData
 
 class BucKitItemService: ObservableObject {
 
-    @Published var items: [BucKitItem] = []
     let context = CoreDataStack.shared.persistentContainer.viewContext
     
     init() {
@@ -61,7 +60,8 @@ class BucKitItemService: ObservableObject {
     }
     
     func getBucKitItem(lat: Double, long: Double, items: [BucKitItem]) -> BucKitItem? {
-        items.first(where: {$0.latitude == lat && $0.longitude == long})
+        let items = items.map({$0})
+        return items.first(where: {$0.latitude == lat && $0.longitude == long})
     }
     
     func saveContext() {
