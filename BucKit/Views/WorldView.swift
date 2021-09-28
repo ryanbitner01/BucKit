@@ -12,14 +12,14 @@ import CoreLocation
 import CoreData
 
 struct WorldView: View {
-
+    
     @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "BucKitItem", in: CoreDataStack.shared.viewContext)!, sortDescriptors: [])
     var results: FetchedResults<BucKitItem>
     
     let bucKitItemService = BucKitItemService()
-
+    @ObservedObject var mapService = MapService()
+    
     @State var searchBar: String = ""
-    @StateObject var mapData = MapViewModel()
     @State var locationManager = CLLocationManager()
     @State private var currentLocation = CLLocationCoordinate2D()
     @State var isShowingDetail = false
@@ -29,11 +29,7 @@ struct WorldView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                MapView(isShowingDetail: $isShowingDetailAlert, selectedItem: $selectedItem, items: results.map({$0}))
-                    .environmentObject(mapData)
-                    .ignoresSafeArea(.all, edges: .all)
-                
-                
+                NewMapView(mapService: mapService)
                 VStack {
                     
                     VStack(spacing: 0) {
@@ -42,20 +38,20 @@ struct WorldView: View {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
                             
-                            TextField("Search", text: $mapData.searchTxt)
+                            TextField("Search", text: $mapService.searchTxt)
                                 .colorScheme(.light)
                         }
                         .padding(.vertical, 10)
                         .padding(.horizontal)
                         .background(Color.white)
                         
-                        if !mapData.places.isEmpty && mapData.searchTxt != "" {
+                        if !mapService.places.isEmpty && mapService.searchTxt != "" {
                             
                             ScrollView {
                                 
                                 VStack(spacing: 15) {
                                     
-                                    ForEach(mapData.places) { place in
+                                    ForEach(mapService.places) { place in
                                         
                                         Text(place.placemark.name ?? "")
                                             .foregroundColor(.black)
@@ -63,7 +59,7 @@ struct WorldView: View {
                                             .padding(.leading)
                                             .onTapGesture {
                                                 
-                                                mapData.selectPlace(place: place)
+                                                mapService.setRegion(place: place)
                                                 
                                             }
                                         
@@ -73,8 +69,8 @@ struct WorldView: View {
                                 }
                                 .padding(.top)
                             }
-                            
                             .background(Color.white)
+
                         }
                     }
                     
@@ -85,7 +81,7 @@ struct WorldView: View {
                     HStack {
                         
                         VStack {
-                            Button(action: mapData.focusLocation, label: {
+                            Button(action: mapService.focusUserLocation, label: {
                                 Image(systemName: "location.fill")
                                     .font(.title2)
                                     .padding(10)
@@ -93,14 +89,6 @@ struct WorldView: View {
                                     .clipShape(Circle())
                             })
                             
-                            Button(action: mapData.updateMapType, label: {
-                                Image(systemName: mapData.mapType == .standard ? "network" : "map")
-                                    .font(.title2)
-                                    .padding(10)
-                                    .background(Color.primary)
-                                    .clipShape(Circle())
-                                
-                            })
                         }
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding()
@@ -111,25 +99,24 @@ struct WorldView: View {
             }
 
             .onAppear(perform: {
-                locationManager.delegate = mapData
-                locationManager.requestWhenInUseAuthorization()
-                
+                mapService.requestPermission()
+
             })
             
-            .alert(isPresented: $mapData.permissionDenied, content: {
-                Alert(title: Text("Permission Denied"), message: Text("Please Enable Permission In App Settings"), dismissButton: .default(Text("Settings"), action: {
-                    
-                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                }))
-            })
-            .onChange(of: mapData.searchTxt, perform: { value in
+//            .alert(isPresented: $mapData.permissionDenied, content: {
+//                Alert(title: Text("Permission Denied"), message: Text("Please Enable Permission In App Settings"), dismissButton: .default(Text("Settings"), action: {
+//                    
+//                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+//                }))
+//            })
+            .onChange(of: mapService.searchTxt, perform: { value in
                 
                 let delay = 0.3
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    if value == mapData.searchTxt {
+                    if value == mapService.searchTxt {
                         
-                        self.mapData.searchQuery()
+                        self.mapService.searchQuery()
                     }
                 }
             })
@@ -146,19 +133,14 @@ struct WorldView: View {
                                         }))
             
         }
-        .alert(isPresented: $isShowingDetailAlert, content: {
-            Alert(title: Text(selectedItem?.title ?? "Unknown"), message: Text(selectedItem?.subtitle ?? "Missing place information."), primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Show Detail")) {
-                    isShowingDetail = true
-                })
-        })
-        .sheet(isPresented: $isShowingDetail, content: {
-            BuckitItemViewWithNavBar(item: getBucKitItem()!)
-        })
-    }
-    
-    func getBucKitItem() -> BucKitItem? {
-        guard let lat = selectedItem?.coordinate.latitude, let long = selectedItem?.coordinate.longitude else {return nil}
-        return bucKitItemService.getBucKitItem(lat: lat, long: long, items: results.map({$0}))
+//        .alert(isPresented: $isShowingDetailAlert, content: {
+//            Alert(title: Text(selectedItem?.title ?? "Unknown"), message: Text(selectedItem?.subtitle ?? "Missing place information."), primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Show Detail")) {
+//                    isShowingDetail = true
+//                })
+//        })
+//        .sheet(isPresented: $isShowingDetail, content: {
+//            BuckitItemViewWithNavBar(item: getBucKitItem()!)
+//        })
     }
 }
 
