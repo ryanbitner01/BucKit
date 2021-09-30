@@ -22,7 +22,7 @@ struct TravelPlanner: View {
         Form {
             Section {
                 Text("Location: \(item.location)")
-                Text("Address: \(item.address)")
+                Text("Address: \(address)")
             }
             Section {
                 Stepper("Number of Adults: \(numOfAdults)", value: $numOfAdults, in: 1...5)

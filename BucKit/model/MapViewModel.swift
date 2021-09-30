@@ -109,5 +109,7 @@ class MapViewModel: NSObject,ObservableObject,CLLocationManagerDelegate {
         
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
     }
+    
+    
 }
 
